@@ -1,0 +1,1332 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c19fc8a18bff1dd0",
+        "type": "tab",
+        "label": "Notifications",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9f820a4ae6200aba",
+        "type": "s7 endpoint",
+        "transport": "iso-on-tcp",
+        "address": "192.168.0.3",
+        "port": "102",
+        "rack": "0",
+        "slot": "2",
+        "localtsaphi": "02",
+        "localtsaplo": "00",
+        "remotetsaphi": "02",
+        "remotetsaplo": "00",
+        "connmode": "rack-slot",
+        "adapter": "",
+        "busaddr": "2",
+        "cycletime": "1000",
+        "timeout": "2000",
+        "name": "PLC Logo 8V3",
+        "vartable": [
+            {
+                "addr": "DB1,X0.0",
+                "name": "R-I1 Bomba 1 On/Off"
+            },
+            {
+                "addr": "DB1,X0.1",
+                "name": "R-I2 Bomba 2 On/Off"
+            },
+            {
+                "addr": "DB1,X0.2",
+                "name": "R-I3 Modo automatico"
+            },
+            {
+                "addr": "DB1,X0.3",
+                "name": "R-I4 Modo manual"
+            },
+            {
+                "addr": "DB1,X0.4",
+                "name": "R-I5 Pulso flujometro"
+            },
+            {
+                "addr": "DB1,X0.5",
+                "name": "R-I6 Presostato"
+            },
+            {
+                "addr": "DB1,X0.6",
+                "name": "R-I7 Falla termica bomba 1"
+            },
+            {
+                "addr": "DB1,X0.7",
+                "name": "R-I8 Falla termica bomba 2"
+            },
+            {
+                "addr": "DB1,X1.0",
+                "name": "R-Q1 Contactor bomba 1"
+            },
+            {
+                "addr": "DB1,X1.1",
+                "name": "R-Q2 Contactor bomba 2"
+            },
+            {
+                "addr": "DB1,X1.2",
+                "name": "R-Q3 Descebo bomba 1"
+            },
+            {
+                "addr": "DB1,X1.3",
+                "name": "R-Q4 Descebo bomba 2"
+            },
+            {
+                "addr": "DB1,X2.0",
+                "name": "W-Q1 Contactor bomba 1"
+            },
+            {
+                "addr": "DB1,X2.1",
+                "name": "W-Q2 Contactor bomba 2"
+            },
+            {
+                "addr": "DB1,X2.2",
+                "name": "W-Q3 Descebo bomba 1"
+            },
+            {
+                "addr": "DB1,X2.3",
+                "name": "W-Q4 Descebo bomba 2"
+            },
+            {
+                "addr": "DB1,X2.4",
+                "name": "W-Pulso flujometro"
+            },
+            {
+                "addr": "DB1,WORD3",
+                "name": "R-Flujo"
+            },
+            {
+                "addr": "DB1,DWORD5",
+                "name": "R-Volumen"
+            }
+        ]
+    },
+    {
+        "id": "96042ed0850f0473",
+        "type": "soap-config",
+        "wsdl": "http://www.dneonline.com/calculator.asmx?wsdl",
+        "auth": "0",
+        "user": "",
+        "pass": "",
+        "key": "",
+        "cert": "",
+        "token": ""
+    },
+    {
+        "id": "80b99021.9a4",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "WhatsApp API Account"
+    },
+    {
+        "id": "b23d8359c5c9ebfb",
+        "type": "postgreSQLConfig",
+        "name": "Timescale",
+        "host": "timescale",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "postgres",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "POSTGRES_USERNAME",
+        "userFieldType": "env",
+        "password": "POSTGRES_PASSWORD",
+        "passwordFieldType": "env"
+    },
+    {
+        "id": "2bfa19bdbbcad994",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I1 Bomba 1 On/Off",
+        "diff": true,
+        "name": "R-I1 Bomba 1 On/Off",
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "92edb2e359363f90"
+            ]
+        ]
+    },
+    {
+        "id": "f5a1496b1f1538b5",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I2 Bomba 2 On/Off",
+        "diff": true,
+        "name": "R-I2 Bomba 2 On/Off",
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "92edb2e359363f90"
+            ]
+        ]
+    },
+    {
+        "id": "92edb2e359363f90",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e972a6f1f5d6c9c2",
+        "type": "s7 out",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "variable": "W-Q1 Contactor bomba 1",
+        "name": "W-Q1 Contactor bomba 1",
+        "x": 370,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7a694b2e0c11e388",
+        "type": "s7 out",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "variable": "W-Q2 Contactor bomba 2",
+        "name": "W-Q2 Contactor bomba 2",
+        "x": 370,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6d459aba11dc9ac1",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "e972a6f1f5d6c9c2"
+            ]
+        ]
+    },
+    {
+        "id": "c1e7a868b1a5cb95",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "e972a6f1f5d6c9c2"
+            ]
+        ]
+    },
+    {
+        "id": "1321532f5c138f71",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "7a694b2e0c11e388"
+            ]
+        ]
+    },
+    {
+        "id": "84d3bced344ddc5f",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "7a694b2e0c11e388"
+            ]
+        ]
+    },
+    {
+        "id": "fbd6fb10ebb4e77f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Toggler",
+        "func": "let toggle = context.get('toggle') || 0;\n\ncontext.set(\"toggle\", !toggle);\n\nmsg.payload = !toggle;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "801304a26341c444"
+            ]
+        ]
+    },
+    {
+        "id": "801304a26341c444",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Toggler",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "603ffd2ea0bcbf2d",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 610,
+        "y": 80,
+        "wires": [
+            [
+                "fbd6fb10ebb4e77f"
+            ]
+        ]
+    },
+    {
+        "id": "d6d8993f0c403f88",
+        "type": "conf ping",
+        "z": "f6f2187d.f17ca8",
+        "name": "Ping PLC",
+        "host": "192.168.0.3",
+        "timeout": "5",
+        "requests": "1",
+        "x": 780,
+        "y": 140,
+        "wires": [
+            [
+                "180715649e02ed21"
+            ]
+        ]
+    },
+    {
+        "id": "180715649e02ed21",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2ec40c931f81559c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 600,
+        "y": 140,
+        "wires": [
+            [
+                "d6d8993f0c403f88"
+            ]
+        ]
+    },
+    {
+        "id": "fc54ca9ea0c3a7a7",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-Volumen",
+        "diff": true,
+        "name": "R-Volumen m3",
+        "x": 180,
+        "y": 740,
+        "wires": [
+            [
+                "ea7cce0b31c42e8e"
+            ]
+        ]
+    },
+    {
+        "id": "2e864232376cf650",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-Flujo",
+        "diff": true,
+        "name": "R-Flujo L/s",
+        "x": 200,
+        "y": 680,
+        "wires": [
+            [
+                "f190de448e6fa47d"
+            ]
+        ]
+    },
+    {
+        "id": "f190de448e6fa47d",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar flujo - Tabla sensor_log",
+        "query": "INSERT INTO sensor_log (time, sensor_id, measurement, status)\n    VALUES (NOW(), 1, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 630,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4bec3a76a413df7",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "W-Q1 Contactor bomba 1",
+        "diff": true,
+        "name": "R-Q1 Contactor bomba 1",
+        "x": 150,
+        "y": 800,
+        "wires": [
+            [
+                "a5e8ca678847893b"
+            ]
+        ]
+    },
+    {
+        "id": "ec5b8bb2b07517d2",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "W-Q2 Contactor bomba 2",
+        "diff": true,
+        "name": "R-Q2 Contactor bomba 2",
+        "x": 150,
+        "y": 860,
+        "wires": [
+            [
+                "b0cebffb90e675c8"
+            ]
+        ]
+    },
+    {
+        "id": "f870bcce822d86f6",
+        "type": "s7 out",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "variable": "W-Pulso flujometro",
+        "name": "W-Pulso flujometro",
+        "x": 350,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8c45812827f6b882",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "f870bcce822d86f6"
+            ]
+        ]
+    },
+    {
+        "id": "85158b7770438709",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "f870bcce822d86f6"
+            ]
+        ]
+    },
+    {
+        "id": "ea7cce0b31c42e8e",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar volumen - Tabla sensor_log",
+        "query": "INSERT INTO sensor_log (time, sensor_id, measurement, status)\n    VALUES (NOW(), 2, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 640,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5e8ca678847893b",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar estado bomba 1 - Tabla actuator_log",
+        "query": "INSERT INTO actuator_log (time, actuator_id, actuator_state, status)\n    VALUES (NOW(), 1, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0cebffb90e675c8",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar estado bomba 2  - Tabla actuator_log",
+        "query": "INSERT INTO actuator_log (time, actuator_id, actuator_state, status)\n    VALUES (NOW(), 2, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f71277c148fb3424",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar estado presostato - Tabla sensor_log",
+        "query": "INSERT INTO sensor_log (time, sensor_id, measurement, status)\n    VALUES (NOW(), 3, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1578a5592949749",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I6 Presostato",
+        "diff": true,
+        "name": "R-I6 Presostato",
+        "x": 180,
+        "y": 620,
+        "wires": [
+            [
+                "7b23eb345a75abd6"
+            ]
+        ]
+    },
+    {
+        "id": "d20933acf80e9cf5",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-Q3 Descebo bomba 1",
+        "diff": true,
+        "name": "R-Q3 Descebo bomba 1",
+        "x": 150,
+        "y": 920,
+        "wires": [
+            [
+                "33c3983fc071c9ec"
+            ]
+        ]
+    },
+    {
+        "id": "4c6abcec5ab57d86",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-Q4 Descebo bomba 2",
+        "diff": true,
+        "name": "R-Q4 Descebo bomba 2",
+        "x": 150,
+        "y": 980,
+        "wires": [
+            [
+                "718f15291eb3cc34"
+            ]
+        ]
+    },
+    {
+        "id": "d2431ab7a01f32ed",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar descebo bomba 1 - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 1, 'Descebo bomba 1');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39d9d68995b8f4f6",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar descebo bomba 2 - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 2, 'Descebo bomba 2');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 670,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b23eb345a75abd6",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 620,
+        "wires": [
+            [
+                "f71277c148fb3424"
+            ]
+        ]
+    },
+    {
+        "id": "1fafabc798186bc8",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I7 Falla termica bomba 1",
+        "diff": true,
+        "name": "R-I7 Falla termica bomba 1",
+        "x": 150,
+        "y": 1040,
+        "wires": [
+            [
+                "d9b290fe2697d0aa"
+            ]
+        ]
+    },
+    {
+        "id": "04522e460c846207",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I8 Falla termica bomba 2",
+        "diff": true,
+        "name": "R-I8 Falla termica bomba 2",
+        "x": 150,
+        "y": 1100,
+        "wires": [
+            [
+                "efe91050b8b1939b"
+            ]
+        ]
+    },
+    {
+        "id": "3b69d623830ae93a",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar falla termica bomba 1 - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 1, 'Falla termica bomba 1');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 680,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54b5c5055b74b73a",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar falla termica  bomba 2 - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 2, 'Falla termica bomba 2');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 680,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b45ff5b86d50b0c8",
+        "type": "s7 out",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "variable": "W-Q3 Descebo bomba 1",
+        "name": "W-Q3 Descebo bomba 1",
+        "x": 370,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "beda29b4fe9e8b95",
+        "type": "s7 out",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "variable": "W-Q4 Descebo bomba 2",
+        "name": "W-Q4 Descebo bomba 2",
+        "x": 370,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3a6f79386e476011",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "b45ff5b86d50b0c8"
+            ]
+        ]
+    },
+    {
+        "id": "c2440a8c39835652",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "b45ff5b86d50b0c8"
+            ]
+        ]
+    },
+    {
+        "id": "ff3f5c4c8ee41af8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "beda29b4fe9e8b95"
+            ]
+        ]
+    },
+    {
+        "id": "b679cbb86b1cea86",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "beda29b4fe9e8b95"
+            ]
+        ]
+    },
+    {
+        "id": "efe91050b8b1939b",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 1100,
+        "wires": [
+            [
+                "54b5c5055b74b73a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d9b290fe2697d0aa",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 1040,
+        "wires": [
+            [
+                "3b69d623830ae93a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "718f15291eb3cc34",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 980,
+        "wires": [
+            [
+                "39d9d68995b8f4f6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "33c3983fc071c9ec",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 920,
+        "wires": [
+            [
+                "d2431ab7a01f32ed"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "90eae997.db5198",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "credtype": "account",
+        "account": "80b99021.9a4",
+        "text": "text",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "msg",
+        "rejectssl": true,
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "b234123a.c95f5"
+            ]
+        ]
+    },
+    {
+        "id": "9b666f3e.797cb",
+        "type": "inject",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "props": [
+            {
+                "p": "text",
+                "v": "This is the Message Text",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "90eae997.db5198"
+            ]
+        ]
+    },
+    {
+        "id": "b234123a.c95f5",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b8f23850488e6c9d",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ArgSOAP",
+        "func": "// Get data from sensor and send data to SOAP server each x interval of time.\nlet A = 0;\nlet B = 0;\n\nlet actualTime = new Date();\nlet prevTime = context.get(\"prevTime\");        // Array to store each pulse date.\n\n// Send information if x amount of time has passed.\nif ((actualTime - prevTime) / 1000 >= 5) {\n    if (msg.payload.length >= 2) {\n        A = Math.round(msg.payload[0][0][\"m3\"]);\n        B = Math.round(msg.payload[1][0][\"m3/hr\"]);\n    }\n\n    let newmsg = {\n        server: \"http://www.dneonline.com/calculator.asmx?wsdl\",\n        options: {},\n        headers: {},\n        payload: { intA: A, intB: B }\n    };\n\n    context.set(\"prevTime\", actualTime);\n\n    return newmsg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 2,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"prevTime\", new Date());",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "e6361a57895b5ba8"
+            ]
+        ]
+    },
+    {
+        "id": "e6361a57895b5ba8",
+        "type": "soap request",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "topic": "",
+        "wsdl": "96042ed0850f0473",
+        "method": "Add",
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "a1c6c6571674b5b7"
+            ]
+        ]
+    },
+    {
+        "id": "a1c6c6571674b5b7",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ResponseSOAP",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c7340578c50653b0",
+        "type": "inject",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 280,
+        "wires": [
+            [
+                "84f1b6136f699e6c"
+            ]
+        ]
+    },
+    {
+        "id": "84f1b6136f699e6c",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Flowmeter - m3/hr",
+        "func": "// Only if pulse is positive continue.\nif(msg.payload == 0) return null;\n\nconst kVolume = 0.002;                          // Volume constant for each pulse [m3/pulse].\nlet actualTime = new Date();                    // Get actual date.\nlet arrTime = flow.get(\"arrTime\") || [];        // Array to store each pulse date.\nlet counter = flow.get(\"counter\", \"file\") || 0; // Count how many pulse there have been.\nlet avgFlow = null;\n\ncounter = counter + 1;\nflow.set(\"counter\", counter, \"file\");           // Store counter locally in file system.\n\n// Set actual time at the begining of array.\narrTime.unshift(actualTime);\n\n// Do not continue if it has less than 2 elements.\nif(arrTime.length == 1){\n    // Store time array.\n    flow.set(\"arrTime\", arrTime);\n    // Not enough data.\n    return null;\n}\n\n// It will keep array length in 10.\nif(arrTime.length > 10) arrTime.pop();\n\n// Store time array.\nflow.set(\"arrTime\", arrTime);\n\n// Get average flow.\n// Average flow = N° of pulses * K [m3/pulse] / Time[]\nlet msPerSecond = 1000;     // How many miliseconds per seconds.\nvolume = kVolume*counter;\navgFlow = 3600*msPerSecond*(arrTime.length - 1)*kVolume/(arrTime[0] - arrTime[arrTime.length - 1]);\n\nmsg.payload = [\n    [{\"m3\": volume},\n    {\"sensor_name\": \"Volumen bombeado\"}],\n    [{\"m3/hr\": avgFlow},\n    {\"sensor_name\": \"Caudal manifold\"}],\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 2,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "b8f23850488e6c9d"
+            ]
+        ]
+    },
+    {
+        "id": "09c5185b84028af8",
+        "type": "inject",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Email test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Test subject",
+        "payload": "This is a test",
+        "payloadType": "str",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "ab24375cb61c90bf"
+            ]
+        ]
+    },
+    {
+        "id": "ab24375cb61c90bf",
+        "type": "e-mail",
+        "z": "c19fc8a18bff1dd0",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "philippe.ilharreguy@gmail.com",
+        "dname": "PI email",
+        "x": 320,
+        "y": 120,
+        "wires": []
+    }
+]

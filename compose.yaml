@@ -1,0 +1,74 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# Docker commands
+#   Daemon pigpiod - Link: https://hub.docker.com/r/zinen2/alpine-pigpiod
+#     docker run -it -p 8888:8888 --privileged zinen2/alpine-pigpiod:arm64v8
+#   Daemon node-red
+#     docker run -p 51880:1880 -v /home/pi/IOT/node-red/data:/data --name nodered nodered/node-red
+#
+# docker compose -f compose.yml --env-file ./../.env up -d
+################################################################################
+version: "3.8"
+
+services:
+  # https://docs.timescale.com/self-hosted/latest/install/installation-docker/#install-self-hosted-timescaledb-from-a-pre-built-container
+  # Volume direction inside container:
+  #     timescaledb-ha -> /home/postgres/pgdata/data
+  #     timescaledb -> /var/lib/postgresql/data
+  # docker exec -it timescale bash
+  timescale:
+    image: timescale/timescaledb:latest-pg15
+    container_name: timescale
+    restart: always
+    ports:
+      - "55432:5432"
+    networks:
+      - iot-net
+    volumes:
+      - /home/pi/IOT/timescale/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    # Check user id: "id -u"
+    user: ${UID}
+    ports:
+      - "53000:3000"
+    networks:
+      - iot-net
+    volumes:
+      - /home/pi/IOT/grafana/data:/var/lib/grafana
+    depends_on:
+      timescale:
+        condition: service_started
+
+  # docker exec -it nodered bash
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    restart: always
+    ports:
+      - "51880:1880"
+    networks:
+      - iot-net
+    volumes:
+      - /home/pi/IOT/node-red/data:/data
+    environment:
+      - POSTGRES_USERNAME=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      timescale:
+        condition: service_started
+
+networks:
+  iot-net:
+    name: iot-net
+    ipam:
+      driver: default
+      config:
+        # This will assign ip 172.30.0.1 to host.
+        - subnet: "172.30.0.0/24"
