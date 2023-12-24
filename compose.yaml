@@ -1,13 +1,9 @@
 ################################################################################
-# Node-RED Stack or Compose
+# Stack: Node-RED TimescaleDB Grafana
 ################################################################################
 # Docker commands
-#   Daemon pigpiod - Link: https://hub.docker.com/r/zinen2/alpine-pigpiod
-#     docker run -it -p 8888:8888 --privileged zinen2/alpine-pigpiod:arm64v8
 #   Daemon node-red
 #     docker run -p 51880:1880 -v /home/pi/IOT/node-red/data:/data --name nodered nodered/node-red
-#
-# docker compose -f compose.yml --env-file ./../.env up -d
 ################################################################################
 version: "3.8"
 
@@ -29,7 +25,8 @@ services:
       - /home/pi/IOT/timescale/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-
+  
+  # docker exec -it grafana bash
   grafana:
     image: grafana/grafana-enterprise
     container_name: grafana
@@ -42,6 +39,15 @@ services:
       - iot-net
     volumes:
       - /home/pi/IOT/grafana/data:/var/lib/grafana
+    #environment:
+    #  - GF_DATABASE_TYPE=postgres
+    #  - GF_DATABASE_HOST=timescale:5432
+    #  - GF_DATABASE_NAME=postgres
+    #  - GF_DATABASE_USER=${POSTGRES_USER}
+    #  - GF_DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+    #  - GF_DATABASE_SSL_MODE=disable
+    #  - GF_DATABASE_VERSION=15
+    #  - GF_DATABASE_TIMESCALEDB=enable
     depends_on:
       timescale:
         condition: service_started

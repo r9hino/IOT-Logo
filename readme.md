@@ -5,6 +5,7 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 1. Define phone numbers in database
 2. Send Whatsapp to list of numbers
 3. Connect to DGA
+4. Phone numbers and API key on environment variables.
 
 ## Mounting docker containers
 ### Docker compose

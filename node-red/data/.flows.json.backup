@@ -15,6 +15,38 @@
         "env": []
     },
     {
+        "id": "9aedd4bd471b6730",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "name": "Test write to PLC - Only used for testing",
+        "style": {
+            "fill": "#ffC000",
+            "label": true,
+            "color": "#3f3f3f"
+        },
+        "nodes": [
+            "e972a6f1f5d6c9c2",
+            "7a694b2e0c11e388",
+            "6d459aba11dc9ac1",
+            "c1e7a868b1a5cb95",
+            "1321532f5c138f71",
+            "84d3bced344ddc5f",
+            "f870bcce822d86f6",
+            "8c45812827f6b882",
+            "85158b7770438709",
+            "b45ff5b86d50b0c8",
+            "beda29b4fe9e8b95",
+            "3a6f79386e476011",
+            "c2440a8c39835652",
+            "ff3f5c4c8ee41af8",
+            "b679cbb86b1cea86"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 452,
+        "h": 442
+    },
+    {
         "id": "9f820a4ae6200aba",
         "type": "s7 endpoint",
         "transport": "iso-on-tcp",
@@ -147,10 +179,10 @@
         "idleFieldType": "num",
         "connectionTimeout": "10000",
         "connectionTimeoutFieldType": "num",
-        "user": "postgres",
-        "userFieldType": "str",
-        "password": "timescale=31415926",
-        "passwordFieldType": "str"
+        "user": "POSTGRES_USERNAME",
+        "userFieldType": "env",
+        "password": "POSTGRES_PASSWORD",
+        "passwordFieldType": "env"
     },
     {
         "id": "2bfa19bdbbcad994",
@@ -206,10 +238,11 @@
         "id": "e972a6f1f5d6c9c2",
         "type": "s7 out",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "endpoint": "9f820a4ae6200aba",
         "variable": "W-Q1 Contactor bomba 1",
         "name": "W-Q1 Contactor bomba 1",
-        "x": 370,
+        "x": 330,
         "y": 60,
         "wires": []
     },
@@ -217,10 +250,11 @@
         "id": "7a694b2e0c11e388",
         "type": "s7 out",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "endpoint": "9f820a4ae6200aba",
         "variable": "W-Q2 Contactor bomba 2",
         "name": "W-Q2 Contactor bomba 2",
-        "x": 370,
+        "x": 330,
         "y": 140,
         "wires": []
     },
@@ -228,6 +262,7 @@
         "id": "6d459aba11dc9ac1",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "1",
         "props": [
             {
@@ -245,7 +280,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 60,
         "wires": [
             [
@@ -257,6 +292,7 @@
         "id": "c1e7a868b1a5cb95",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "0",
         "props": [
             {
@@ -274,7 +310,7 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 100,
         "wires": [
             [
@@ -286,6 +322,7 @@
         "id": "1321532f5c138f71",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "1",
         "props": [
             {
@@ -303,7 +340,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 140,
         "wires": [
             [
@@ -315,6 +352,7 @@
         "id": "84d3bced344ddc5f",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "0",
         "props": [
             {
@@ -332,7 +370,7 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 180,
         "wires": [
             [
@@ -555,10 +593,11 @@
         "id": "f870bcce822d86f6",
         "type": "s7 out",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "endpoint": "9f820a4ae6200aba",
         "variable": "W-Pulso flujometro",
         "name": "W-Pulso flujometro",
-        "x": 350,
+        "x": 310,
         "y": 380,
         "wires": []
     },
@@ -566,6 +605,7 @@
         "id": "8c45812827f6b882",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "1",
         "props": [
             {
@@ -583,7 +623,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 380,
         "wires": [
             [
@@ -595,6 +635,7 @@
         "id": "85158b7770438709",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "0",
         "props": [
             {
@@ -612,7 +653,7 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 420,
         "wires": [
             [
@@ -739,30 +780,14 @@
         "id": "d2431ab7a01f32ed",
         "type": "postgresql",
         "z": "f6f2187d.f17ca8",
-        "name": "Insertar descebo bomba 1 - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 1, 'Descebo bomba 1');",
+        "name": "Insertar alerta - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), $1, $2, $3);",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 670,
+        "x": 810,
         "y": 920,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "39d9d68995b8f4f6",
-        "type": "postgresql",
-        "z": "f6f2187d.f17ca8",
-        "name": "Insertar descebo bomba 2 - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 2, 'Descebo bomba 2');",
-        "postgreSQLConfig": "b23d8359c5c9ebfb",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 670,
-        "y": 980,
         "wires": [
             []
         ]
@@ -840,45 +865,14 @@
         ]
     },
     {
-        "id": "3b69d623830ae93a",
-        "type": "postgresql",
-        "z": "f6f2187d.f17ca8",
-        "name": "Insertar falla termica bomba 1 - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 1, 'Falla termica bomba 1');",
-        "postgreSQLConfig": "b23d8359c5c9ebfb",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 680,
-        "y": 1040,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "54b5c5055b74b73a",
-        "type": "postgresql",
-        "z": "f6f2187d.f17ca8",
-        "name": "Insertar falla termica  bomba 2 - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, actuator_id, alert_message)\n    VALUES (NOW(), 2, 'Falla termica bomba 2');",
-        "postgreSQLConfig": "b23d8359c5c9ebfb",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 680,
-        "y": 1100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "b45ff5b86d50b0c8",
         "type": "s7 out",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "endpoint": "9f820a4ae6200aba",
         "variable": "W-Q3 Descebo bomba 1",
         "name": "W-Q3 Descebo bomba 1",
-        "x": 370,
+        "x": 330,
         "y": 220,
         "wires": []
     },
@@ -886,10 +880,11 @@
         "id": "beda29b4fe9e8b95",
         "type": "s7 out",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "endpoint": "9f820a4ae6200aba",
         "variable": "W-Q4 Descebo bomba 2",
         "name": "W-Q4 Descebo bomba 2",
-        "x": 370,
+        "x": 330,
         "y": 300,
         "wires": []
     },
@@ -897,6 +892,7 @@
         "id": "3a6f79386e476011",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "1",
         "props": [
             {
@@ -914,7 +910,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 220,
         "wires": [
             [
@@ -926,6 +922,7 @@
         "id": "c2440a8c39835652",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "0",
         "props": [
             {
@@ -943,7 +940,7 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 260,
         "wires": [
             [
@@ -955,6 +952,7 @@
         "id": "ff3f5c4c8ee41af8",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "1",
         "props": [
             {
@@ -972,7 +970,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 300,
         "wires": [
             [
@@ -984,6 +982,7 @@
         "id": "b679cbb86b1cea86",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
+        "g": "9aedd4bd471b6730",
         "name": "0",
         "props": [
             {
@@ -1001,7 +1000,7 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 150,
+        "x": 110,
         "y": 340,
         "wires": [
             [
@@ -1027,11 +1026,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
+        "x": 350,
         "y": 1100,
         "wires": [
             [
-                "54b5c5055b74b73a"
+                "91334c2980e70d2b"
             ],
             []
         ]
@@ -1054,11 +1053,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
+        "x": 350,
         "y": 1040,
         "wires": [
             [
-                "3b69d623830ae93a"
+                "aa90b1dd3cf2d1e3"
             ],
             []
         ]
@@ -1081,11 +1080,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
+        "x": 350,
         "y": 980,
         "wires": [
             [
-                "39d9d68995b8f4f6"
+                "82032042c88fc8d5"
             ],
             []
         ]
@@ -1108,12 +1107,116 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
+        "x": 350,
         "y": 920,
         "wires": [
             [
-                "d2431ab7a01f32ed"
+                "d5a70810fe6f354d"
             ],
+            []
+        ]
+    },
+    {
+        "id": "d5a70810fe6f354d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "let sensor_id = null;\nlet actuator_id = 1;\nlet alert_message = 'Descebo bomba 1 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 920,
+        "wires": [
+            [
+                "d2431ab7a01f32ed",
+                "40c478d43ffc88ff"
+            ]
+        ]
+    },
+    {
+        "id": "82032042c88fc8d5",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 2",
+        "func": "let sensor_id = null;\nlet actuator_id = 2;\nlet alert_message = 'Descebo bomba 2 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 980,
+        "wires": [
+            [
+                "d2431ab7a01f32ed",
+                "40c478d43ffc88ff"
+            ]
+        ]
+    },
+    {
+        "id": "aa90b1dd3cf2d1e3",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 3",
+        "func": "let sensor_id = null;\nlet actuator_id = 1;\nlet alert_message = 'Falla termica bomba 1 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1040,
+        "wires": [
+            [
+                "d2431ab7a01f32ed",
+                "40c478d43ffc88ff"
+            ]
+        ]
+    },
+    {
+        "id": "91334c2980e70d2b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 4",
+        "func": "let sensor_id = null;\nlet actuator_id = 2;\nlet alert_message = 'Falla termica bomba 2 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1100,
+        "wires": [
+            [
+                "d2431ab7a01f32ed",
+                "40c478d43ffc88ff"
+            ]
+        ]
+    },
+    {
+        "id": "40c478d43ffc88ff",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "credtype": "account",
+        "account": "80b99021.9a4",
+        "text": "alert_message",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "msg",
+        "rejectssl": true,
+        "x": 760,
+        "y": 1100,
+        "wires": [
             []
         ]
     },
