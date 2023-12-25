@@ -299,7 +299,7 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "onceDelay": 0.1,
+        "onceDelay": "0.5",
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
@@ -413,7 +413,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
+        "x": 720,
         "y": 80,
         "wires": [
             [
@@ -434,7 +434,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 940,
+        "x": 860,
         "y": 80,
         "wires": []
     },
@@ -459,7 +459,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 610,
+        "x": 570,
         "y": 80,
         "wires": [
             [
@@ -475,7 +475,7 @@
         "host": "192.168.0.3",
         "timeout": "5",
         "requests": "1",
-        "x": 780,
+        "x": 720,
         "y": 140,
         "wires": [
             [
@@ -495,7 +495,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 940,
+        "x": 860,
         "y": 140,
         "wires": []
     },
@@ -520,7 +520,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 600,
+        "x": 560,
         "y": 140,
         "wires": [
             [
@@ -1249,9 +1249,9 @@
         "z": "f6f2187d.f17ca8",
         "name": "Ping PLC",
         "host": "192.168.0.3",
-        "timeout": "5",
-        "requests": "1",
-        "x": 240,
+        "timeout": "3",
+        "requests": "3",
+        "x": 260,
         "y": 1160,
         "wires": [
             [
@@ -1273,7 +1273,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 1180,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1290,14 +1290,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "10",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 110,
         "y": 1160,
         "wires": [
             [
@@ -1310,14 +1310,14 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 5",
-        "func": "if(msg.payload != false){\n    msg.payload = true;\n}\n\nelse if(msg.payload == false){\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\n\nreturn msg;",
+        "func": "if(msg.payload != false){\n    msg.payload = true;\n    msg.actuator_id = 3;\n    msg.status = 'inactivo';\n}\n\nelse if(msg.payload == false){\n    msg.actuator_id = 3;\n    msg.status = 'inactivo';\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
+        "x": 400,
         "y": 1160,
         "wires": [
             [
@@ -1335,8 +1335,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 450,
-        "y": 1220,
+        "x": 710,
+        "y": 1280,
         "wires": [
             []
         ]
@@ -1353,7 +1353,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 510,
+        "x": 530,
         "y": 1160,
         "wires": [
             [
@@ -1379,7 +1379,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 630,
+        "x": 650,
         "y": 1160,
         "wires": [
             [
