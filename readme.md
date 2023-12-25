@@ -6,6 +6,7 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 2. Send Whatsapp to list of numbers
 3. Connect to DGA
 4. Phone numbers and API key on environment variables.
+5. Return PLC actuator to 'activo' when PLC connection is restablish
 
 ## Mounting docker containers
 ### Docker compose

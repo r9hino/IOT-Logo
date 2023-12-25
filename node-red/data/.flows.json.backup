@@ -185,6 +185,29 @@
         "passwordFieldType": "env"
     },
     {
+        "id": "20ae1e52d1eef983",
+        "type": "postgreSQLConfig",
+        "name": "myuser@timescale:5432/iot",
+        "host": "timescale",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "iot",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "myuser",
+        "userFieldType": "str",
+        "password": "???",
+        "passwordFieldType": "str"
+    },
+    {
         "id": "2bfa19bdbbcad994",
         "type": "s7 in",
         "z": "f6f2187d.f17ca8",
@@ -223,7 +246,7 @@
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "debug 1",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -530,8 +553,8 @@
         "mode": "single",
         "variable": "R-Flujo",
         "diff": true,
-        "name": "R-Flujo L/s",
-        "x": 200,
+        "name": "R-Flujo L/min",
+        "x": 190,
         "y": 680,
         "wires": [
             [
@@ -781,7 +804,7 @@
         "type": "postgresql",
         "z": "f6f2187d.f17ca8",
         "name": "Insertar alerta - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), $1, $2, $3);",
+        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), NULL, {{{msg.actuator_id}}}, '{{{msg.alert_message}}}');",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
@@ -1121,7 +1144,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 1",
-        "func": "let sensor_id = null;\nlet actuator_id = 1;\nlet alert_message = 'Descebo bomba 1 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "func": "msg.sensor_id = null;\nmsg.actuator_id = 1;\nmsg.alert_message = 'Descebo bomba 1 rio';\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1142,7 +1165,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 2",
-        "func": "let sensor_id = null;\nlet actuator_id = 2;\nlet alert_message = 'Descebo bomba 2 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "func": "msg.sensor_id = null;\nmsg.actuator_id = 2;\nmsg.alert_message = 'Descebo bomba 2 rio';\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1163,7 +1186,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 3",
-        "func": "let sensor_id = null;\nlet actuator_id = 1;\nlet alert_message = 'Falla termica bomba 1 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "func": "msg.sensor_id = null;\nmsg.actuator_id = 1;\nmsg.alert_message = 'Falla termica bomba 1 rio';\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1184,7 +1207,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 4",
-        "func": "let sensor_id = null;\nlet actuator_id = 2;\nlet alert_message = 'Falla termica bomba 2 rio';\nmsg.params = [sensor_id, actuator_id, alert_message];\n\nreturn msg;",
+        "func": "msg.sensor_id = null;\nmsg.actuator_id = 2;\nmsg.alert_message = 'Falla termica bomba 2 rio';\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1218,6 +1241,153 @@
         "y": 1100,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "0232095f769d9c51",
+        "type": "conf ping",
+        "z": "f6f2187d.f17ca8",
+        "name": "Ping PLC",
+        "host": "192.168.0.3",
+        "timeout": "5",
+        "requests": "1",
+        "x": 240,
+        "y": 1160,
+        "wires": [
+            [
+                "9b391cacec3675a5"
+            ]
+        ]
+    },
+    {
+        "id": "ebc95900ee5b6607",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "89fc558bc260a9d6",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 1160,
+        "wires": [
+            [
+                "0232095f769d9c51"
+            ]
+        ]
+    },
+    {
+        "id": "9b391cacec3675a5",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 5",
+        "func": "if(msg.payload != false){\n    msg.payload = true;\n}\n\nelse if(msg.payload == false){\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1160,
+        "wires": [
+            [
+                "d041b84986b89802"
+            ]
+        ]
+    },
+    {
+        "id": "18a3b47226a3bbd2",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar alerta - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), NULL, NULL, '{{{msg.alert_message}}}');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 450,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d041b84986b89802",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 510,
+        "y": 1160,
+        "wires": [
+            [
+                "8cf4219a27eea7b5"
+            ]
+        ]
+    },
+    {
+        "id": "8cf4219a27eea7b5",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 1160,
+        "wires": [
+            [
+                "ebc95900ee5b6607"
+            ],
+            [
+                "ebc95900ee5b6607"
+            ]
         ]
     },
     {
