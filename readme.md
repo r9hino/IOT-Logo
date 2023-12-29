@@ -2,9 +2,9 @@
 Gateway for IOT application using Docker containers: timescaleDB, node-red, Grafana
 
 ## To-do:
-1. Define phone numbers in database
-2. Send Whatsapp to list of phone numbers
-3. Connect to DGA
+1. Define phone numbers in database.
+2. Send Whatsapp to list of phone numbers.
+3. Connect to DGA.
 4. Phone numbers and API key on environment variables?
 5. Get all alert message in one place and on Notification flow send whatsapp.
 
