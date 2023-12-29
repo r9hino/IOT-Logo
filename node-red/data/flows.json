@@ -144,17 +144,6 @@
         ]
     },
     {
-        "id": "96042ed0850f0473",
-        "type": "soap-config",
-        "wsdl": "http://www.dneonline.com/calculator.asmx?wsdl",
-        "auth": "0",
-        "user": "",
-        "pass": "",
-        "key": "",
-        "cert": "",
-        "token": ""
-    },
-    {
         "id": "80b99021.9a4",
         "type": "node-red-contrib-whatsapp-cmb-account",
         "name": "WhatsApp API Account"
@@ -185,27 +174,37 @@
         "passwordFieldType": "env"
     },
     {
-        "id": "20ae1e52d1eef983",
-        "type": "postgreSQLConfig",
-        "name": "myuser@timescale:5432/iot",
-        "host": "timescale",
-        "hostFieldType": "str",
-        "port": "5432",
-        "portFieldType": "num",
-        "database": "iot",
-        "databaseFieldType": "str",
-        "ssl": "false",
-        "sslFieldType": "bool",
-        "max": "10",
-        "maxFieldType": "num",
-        "idle": "1000",
-        "idleFieldType": "num",
-        "connectionTimeout": "10000",
-        "connectionTimeoutFieldType": "num",
-        "user": "myuser",
-        "userFieldType": "str",
-        "password": "???",
-        "passwordFieldType": "str"
+        "id": "81f4a74cd24f20de",
+        "type": "soap-config-plus",
+        "wsdl": "http://dneonline.com/calculator.asmx?WSDL",
+        "auth": "0",
+        "user": "",
+        "pass": "",
+        "key": "",
+        "cert": "",
+        "token": ""
+    },
+    {
+        "id": "22d655552657cf36",
+        "type": "soap-config-plus",
+        "wsdl": "https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService",
+        "auth": "0",
+        "user": "",
+        "pass": "",
+        "key": "",
+        "cert": "",
+        "token": ""
+    },
+    {
+        "id": "98de054f4655bf0f",
+        "type": "soap-config-plus",
+        "wsdl": "https://www.dataaccess.com/webservicesserver/numberconversion.wso",
+        "auth": "0",
+        "user": "",
+        "pass": "",
+        "key": "",
+        "cert": "",
+        "token": ""
     },
     {
         "id": "2bfa19bdbbcad994",
@@ -216,11 +215,11 @@
         "variable": "R-I1 Bomba 1 On/Off",
         "diff": true,
         "name": "R-I1 Bomba 1 On/Off",
-        "x": 160,
+        "x": 140,
         "y": 500,
         "wires": [
             [
-                "92edb2e359363f90"
+                "d843fce6292326d2"
             ]
         ]
     },
@@ -233,11 +232,11 @@
         "variable": "R-I2 Bomba 2 On/Off",
         "diff": true,
         "name": "R-I2 Bomba 2 On/Off",
-        "x": 160,
+        "x": 140,
         "y": 560,
         "wires": [
             [
-                "92edb2e359363f90"
+                "4224d753ab9bdffa"
             ]
         ]
     },
@@ -253,7 +252,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
+        "x": 720,
         "y": 500,
         "wires": []
     },
@@ -468,67 +467,6 @@
         ]
     },
     {
-        "id": "d6d8993f0c403f88",
-        "type": "conf ping",
-        "z": "f6f2187d.f17ca8",
-        "name": "Ping PLC",
-        "host": "192.168.0.3",
-        "timeout": "5",
-        "requests": "1",
-        "x": 720,
-        "y": 140,
-        "wires": [
-            [
-                "180715649e02ed21"
-            ]
-        ]
-    },
-    {
-        "id": "180715649e02ed21",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "2ec40c931f81559c",
-        "type": "inject",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 560,
-        "y": 140,
-        "wires": [
-            [
-                "d6d8993f0c403f88"
-            ]
-        ]
-    },
-    {
         "id": "fc54ca9ea0c3a7a7",
         "type": "s7 in",
         "z": "f6f2187d.f17ca8",
@@ -537,11 +475,11 @@
         "variable": "R-Volumen",
         "diff": true,
         "name": "R-Volumen m3",
-        "x": 180,
+        "x": 160,
         "y": 740,
         "wires": [
             [
-                "ea7cce0b31c42e8e"
+                "6c9da29d426b490e"
             ]
         ]
     },
@@ -554,11 +492,11 @@
         "variable": "R-Flujo",
         "diff": true,
         "name": "R-Flujo L/min",
-        "x": 190,
+        "x": 170,
         "y": 680,
         "wires": [
             [
-                "f190de448e6fa47d"
+                "5a4baefcfe250236"
             ]
         ]
     },
@@ -572,7 +510,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 630,
+        "x": 810,
         "y": 680,
         "wires": [
             []
@@ -587,11 +525,11 @@
         "variable": "W-Q1 Contactor bomba 1",
         "diff": true,
         "name": "R-Q1 Contactor bomba 1",
-        "x": 150,
+        "x": 130,
         "y": 800,
         "wires": [
             [
-                "a5e8ca678847893b"
+                "456ef010663bd89e"
             ]
         ]
     },
@@ -604,11 +542,11 @@
         "variable": "W-Q2 Contactor bomba 2",
         "diff": true,
         "name": "R-Q2 Contactor bomba 2",
-        "x": 150,
+        "x": 130,
         "y": 860,
         "wires": [
             [
-                "b0cebffb90e675c8"
+                "3fa3a438efece258"
             ]
         ]
     },
@@ -694,7 +632,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 640,
+        "x": 820,
         "y": 740,
         "wires": [
             []
@@ -710,7 +648,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 670,
+        "x": 850,
         "y": 800,
         "wires": [
             []
@@ -726,7 +664,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 670,
+        "x": 850,
         "y": 860,
         "wires": [
             []
@@ -742,7 +680,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 670,
+        "x": 850,
         "y": 620,
         "wires": [
             []
@@ -757,11 +695,11 @@
         "variable": "R-I6 Presostato",
         "diff": true,
         "name": "R-I6 Presostato",
-        "x": 180,
+        "x": 160,
         "y": 620,
         "wires": [
             [
-                "7b23eb345a75abd6"
+                "83cacdf41bfc6702"
             ]
         ]
     },
@@ -774,11 +712,11 @@
         "variable": "R-Q3 Descebo bomba 1",
         "diff": true,
         "name": "R-Q3 Descebo bomba 1",
-        "x": 150,
+        "x": 130,
         "y": 920,
         "wires": [
             [
-                "33c3983fc071c9ec"
+                "98a78b9c0a47453f"
             ]
         ]
     },
@@ -791,11 +729,11 @@
         "variable": "R-Q4 Descebo bomba 2",
         "diff": true,
         "name": "R-Q4 Descebo bomba 2",
-        "x": 150,
+        "x": 130,
         "y": 980,
         "wires": [
             [
-                "718f15291eb3cc34"
+                "dad7b6edf8739758"
             ]
         ]
     },
@@ -845,7 +783,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 380,
+        "x": 480,
         "y": 620,
         "wires": [
             [
@@ -862,11 +800,11 @@
         "variable": "R-I7 Falla termica bomba 1",
         "diff": true,
         "name": "R-I7 Falla termica bomba 1",
-        "x": 150,
+        "x": 130,
         "y": 1040,
         "wires": [
             [
-                "d9b290fe2697d0aa"
+                "99d331f8bb834be8"
             ]
         ]
     },
@@ -879,11 +817,11 @@
         "variable": "R-I8 Falla termica bomba 2",
         "diff": true,
         "name": "R-I8 Falla termica bomba 2",
-        "x": 150,
+        "x": 130,
         "y": 1100,
         "wires": [
             [
-                "efe91050b8b1939b"
+                "8a60685fce5357a8"
             ]
         ]
     },
@@ -1049,7 +987,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 350,
+        "x": 430,
         "y": 1100,
         "wires": [
             [
@@ -1076,7 +1014,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 350,
+        "x": 430,
         "y": 1040,
         "wires": [
             [
@@ -1103,7 +1041,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 350,
+        "x": 430,
         "y": 980,
         "wires": [
             [
@@ -1130,7 +1068,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 350,
+        "x": 430,
         "y": 920,
         "wires": [
             [
@@ -1151,7 +1089,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 560,
         "y": 920,
         "wires": [
             [
@@ -1172,7 +1110,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 560,
         "y": 980,
         "wires": [
             [
@@ -1193,7 +1131,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 560,
         "y": 1040,
         "wires": [
             [
@@ -1214,7 +1152,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 560,
         "y": 1100,
         "wires": [
             [
@@ -1251,30 +1189,13 @@
         "host": "192.168.0.3",
         "timeout": "3",
         "requests": "3",
-        "x": 260,
-        "y": 1160,
+        "x": 240,
+        "y": 1220,
         "wires": [
             [
                 "9b391cacec3675a5"
             ]
         ]
-    },
-    {
-        "id": "ebc95900ee5b6607",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 1160,
-        "wires": []
     },
     {
         "id": "89fc558bc260a9d6",
@@ -1290,15 +1211,15 @@
                 "vt": "str"
             }
         ],
-        "repeat": "10",
+        "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
-        "y": 1160,
+        "x": 100,
+        "y": 1220,
         "wires": [
             [
                 "0232095f769d9c51"
@@ -1309,16 +1230,16 @@
         "id": "9b391cacec3675a5",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "name": "function 5",
-        "func": "if(msg.payload != false){\n    msg.payload = true;\n    msg.actuator_id = 3;\n    msg.status = 'inactivo';\n}\n\nelse if(msg.payload == false){\n    msg.actuator_id = 3;\n    msg.status = 'inactivo';\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\n\nreturn msg;",
+        "name": "Status checker 1",
+        "func": "if(msg.payload != false){\n    msg.payload = true;\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n}\n\nelse if(msg.payload == false){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';    // Assuming something is wrong with communication, not with PLC\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 1160,
+        "x": 410,
+        "y": 1220,
         "wires": [
             [
                 "d041b84986b89802"
@@ -1326,38 +1247,24 @@
         ]
     },
     {
-        "id": "18a3b47226a3bbd2",
-        "type": "postgresql",
-        "z": "f6f2187d.f17ca8",
-        "name": "Insertar alerta - Tabla alert_log",
-        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), NULL, NULL, '{{{msg.alert_message}}}');",
-        "postgreSQLConfig": "b23d8359c5c9ebfb",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 710,
-        "y": 1280,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "d041b84986b89802",
         "type": "rbe",
         "z": "f6f2187d.f17ca8",
         "name": "",
-        "func": "rbe",
+        "func": "rbei",
         "gap": "",
         "start": "",
         "inout": "out",
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 530,
-        "y": 1160,
+        "x": 590,
+        "y": 1240,
         "wires": [
             [
-                "8cf4219a27eea7b5"
+                "8cf4219a27eea7b5",
+                "7a4a8bfab633d13d",
+                "5970e233d78f0ac6"
             ]
         ]
     },
@@ -1379,32 +1286,348 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 650,
-        "y": 1160,
+        "x": 590,
+        "y": 1180,
         "wires": [
+            [],
             [
-                "ebc95900ee5b6607"
-            ],
-            [
-                "ebc95900ee5b6607"
+                "2faae45e9f697935",
+                "40c478d43ffc88ff"
             ]
         ]
     },
     {
-        "id": "82fa90575550b084",
+        "id": "aeab43d924247d95",
         "type": "status",
         "z": "f6f2187d.f17ca8",
         "name": "",
         "scope": [
             "e4bec3a76a413df7"
         ],
-        "x": 640,
-        "y": 1220,
+        "x": 80,
+        "y": 1260,
         "wires": [
             [
+                "5fb634a2da765abf"
+            ]
+        ]
+    },
+    {
+        "id": "5fb634a2da765abf",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Status checker 2",
+        "func": "// Check the communication status from the PLC ping.\nif (msg.status.text == 'offline'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';\n    msg.payload = false;\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\nelse if(msg.status.text != 'connecting'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n    msg.payload = true;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1260,
+        "wires": [
+            [
+                "d041b84986b89802",
                 "ebc95900ee5b6607"
             ]
         ]
+    },
+    {
+        "id": "49b9802401c46d75",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "Check communication between gateway and PLC",
+        "info": "",
+        "x": 200,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "7a4a8bfab633d13d",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar status PLC - Tabla actuator_log",
+        "query": "INSERT INTO actuator_log (time, actuator_id, actuator_state, status)\n    VALUES (NOW(), {{{msg.actuator_id}}}, {{{msg.actuator_state}}}, '{{{msg.status}}}');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 840,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2faae45e9f697935",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar alerta - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), NULL, {{{msg.actuator_id}}}, '{{{msg.alert_message}}}');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 810,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "456ef010663bd89e",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 800,
+        "wires": [
+            [
+                "a5e8ca678847893b"
+            ]
+        ]
+    },
+    {
+        "id": "3fa3a438efece258",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 860,
+        "wires": [
+            [
+                "b0cebffb90e675c8"
+            ]
+        ]
+    },
+    {
+        "id": "d843fce6292326d2",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 500,
+        "wires": [
+            [
+                "92edb2e359363f90"
+            ]
+        ]
+    },
+    {
+        "id": "4224d753ab9bdffa",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 560,
+        "wires": [
+            [
+                "92edb2e359363f90"
+            ]
+        ]
+    },
+    {
+        "id": "83cacdf41bfc6702",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "7b23eb345a75abd6"
+            ]
+        ]
+    },
+    {
+        "id": "5a4baefcfe250236",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "f190de448e6fa47d"
+            ]
+        ]
+    },
+    {
+        "id": "6c9da29d426b490e",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 740,
+        "wires": [
+            [
+                "ea7cce0b31c42e8e"
+            ]
+        ]
+    },
+    {
+        "id": "98a78b9c0a47453f",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 920,
+        "wires": [
+            [
+                "33c3983fc071c9ec"
+            ]
+        ]
+    },
+    {
+        "id": "dad7b6edf8739758",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 980,
+        "wires": [
+            [
+                "718f15291eb3cc34"
+            ]
+        ]
+    },
+    {
+        "id": "99d331f8bb834be8",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 1040,
+        "wires": [
+            [
+                "d9b290fe2697d0aa"
+            ]
+        ]
+    },
+    {
+        "id": "8a60685fce5357a8",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 1100,
+        "wires": [
+            [
+                "efe91050b8b1939b"
+            ]
+        ]
+    },
+    {
+        "id": "ebc95900ee5b6607",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "5970e233d78f0ac6",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1300,
+        "wires": []
     },
     {
         "id": "90eae997.db5198",
@@ -1475,34 +1698,18 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "ArgSOAP",
-        "func": "// Get data from sensor and send data to SOAP server each x interval of time.\nlet A = 0;\nlet B = 0;\n\nlet actualTime = new Date();\nlet prevTime = context.get(\"prevTime\");        // Array to store each pulse date.\n\n// Send information if x amount of time has passed.\nif ((actualTime - prevTime) / 1000 >= 5) {\n    if (msg.payload.length >= 2) {\n        A = Math.round(msg.payload[0][0][\"m3\"]);\n        B = Math.round(msg.payload[1][0][\"m3/hr\"]);\n    }\n\n    let newmsg = {\n        server: \"http://www.dneonline.com/calculator.asmx?wsdl\",\n        options: {},\n        headers: {},\n        payload: { intA: A, intB: B }\n    };\n\n    context.set(\"prevTime\", actualTime);\n\n    return newmsg;\n}\n",
+        "func": "// Get data from sensor and send data to SOAP server each x interval of time.\nlet A = 1;\nlet B = 2;\n\nlet newmsg = {\n    server: \"http://www.dneonline.com/calculator.asmx?wsdl\",\n    options: {},\n    headers: {},\n    payload: { intA: A, intB: B }\n};\n\n\nreturn newmsg;\n\n",
         "outputs": 1,
         "timeout": 0,
-        "noerr": 2,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"prevTime\", new Date());",
+        "noerr": 0,
+        "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 300,
         "y": 280,
         "wires": [
             [
-                "e6361a57895b5ba8"
-            ]
-        ]
-    },
-    {
-        "id": "e6361a57895b5ba8",
-        "type": "soap request",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "topic": "",
-        "wsdl": "96042ed0850f0473",
-        "method": "Add",
-        "x": 650,
-        "y": 280,
-        "wires": [
-            [
-                "a1c6c6571674b5b7"
+                "860bd7753ad194d6"
             ]
         ]
     },
@@ -1515,11 +1722,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
+        "x": 720,
         "y": 280,
         "wires": []
     },
@@ -1545,26 +1752,6 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 280,
-        "wires": [
-            [
-                "84f1b6136f699e6c"
-            ]
-        ]
-    },
-    {
-        "id": "84f1b6136f699e6c",
-        "type": "function",
-        "z": "c19fc8a18bff1dd0",
-        "name": "Flowmeter - m3/hr",
-        "func": "// Only if pulse is positive continue.\nif(msg.payload == 0) return null;\n\nconst kVolume = 0.002;                          // Volume constant for each pulse [m3/pulse].\nlet actualTime = new Date();                    // Get actual date.\nlet arrTime = flow.get(\"arrTime\") || [];        // Array to store each pulse date.\nlet counter = flow.get(\"counter\", \"file\") || 0; // Count how many pulse there have been.\nlet avgFlow = null;\n\ncounter = counter + 1;\nflow.set(\"counter\", counter, \"file\");           // Store counter locally in file system.\n\n// Set actual time at the begining of array.\narrTime.unshift(actualTime);\n\n// Do not continue if it has less than 2 elements.\nif(arrTime.length == 1){\n    // Store time array.\n    flow.set(\"arrTime\", arrTime);\n    // Not enough data.\n    return null;\n}\n\n// It will keep array length in 10.\nif(arrTime.length > 10) arrTime.pop();\n\n// Store time array.\nflow.set(\"arrTime\", arrTime);\n\n// Get average flow.\n// Average flow = N° of pulses * K [m3/pulse] / Time[]\nlet msPerSecond = 1000;     // How many miliseconds per seconds.\nvolume = kVolume*counter;\navgFlow = 3600*msPerSecond*(arrTime.length - 1)*kVolume/(arrTime[0] - arrTime[arrTime.length - 1]);\n\nmsg.payload = [\n    [{\"m3\": volume},\n    {\"sensor_name\": \"Volumen bombeado\"}],\n    [{\"m3/hr\": avgFlow},\n    {\"sensor_name\": \"Caudal manifold\"}],\n];\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 2,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
         "y": 280,
         "wires": [
             [
@@ -1617,5 +1804,192 @@
         "x": 320,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "9ae215cb4e377e36",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "68926513297359aa",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ArgSOAP",
+        "func": "let getDataExtraccionRequest = {};\nlet newmsg = {\n    server: \"https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService\",\n    options: {},\n    headers: {},\n    payload: {\n    }\n};\n/*\npayload: {\n            codigoDeLaObra: \"OB-0901-78\",\n            numeroComprobante: \"a337b5d3158d0af71ddec1159d9ca690\"\n    }\n    */\nreturn newmsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 400,
+        "wires": [
+            [
+                "dd90b7fa6e9340fa"
+            ]
+        ]
+    },
+    {
+        "id": "67ab826ef7fe7aae",
+        "type": "inject",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 400,
+        "wires": [
+            [
+                "68926513297359aa"
+            ]
+        ]
+    },
+    {
+        "id": "860bd7753ad194d6",
+        "type": "soap request plus",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "topic": "",
+        "wsdl": "81f4a74cd24f20de",
+        "method": "Add",
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "a1c6c6571674b5b7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dd90b7fa6e9340fa",
+        "type": "soap request plus",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "topic": "",
+        "wsdl": "22d655552657cf36",
+        "method": "getDataExtraccionOp",
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "9ae215cb4e377e36"
+            ],
+            [
+                "9ae215cb4e377e36"
+            ]
+        ]
+    },
+    {
+        "id": "0af4ebf7dc8b6fcf",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ArgSOAP",
+        "func": "\nlet newmsg = {\n    server: \"https://www.dataaccess.com/webservicesserver/numberconversion.wso\",\n    options: {},\n    headers: {},\n    payload: {\n        ubiNum: 124\n    }\n};\n\n\nreturn newmsg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 340,
+        "wires": [
+            [
+                "f90788be73cc17d2"
+            ]
+        ]
+    },
+    {
+        "id": "513a9e5a5c3b0a52",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ResponseSOAP",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f70ee812c391059f",
+        "type": "inject",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "0af4ebf7dc8b6fcf"
+            ]
+        ]
+    },
+    {
+        "id": "f90788be73cc17d2",
+        "type": "soap request plus",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "topic": "",
+        "wsdl": "98de054f4655bf0f",
+        "method": "NumberToWords",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "513a9e5a5c3b0a52"
+            ],
+            [
+                "513a9e5a5c3b0a52"
+            ]
+        ]
     }
 ]
