@@ -252,7 +252,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
+        "x": 740,
         "y": 500,
         "wires": []
     },
@@ -1791,7 +1791,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "ArgSOAP",
-        "func": "let getDataExtraccionRequest = {};\nlet newmsg = {\n    server: \"https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService\",\n    options: {},\n    headers: {},\n    payload: {\n    }\n};\n/*\npayload: {\n            codigoDeLaObra: \"OB-0901-78\",\n            numeroComprobante: \"a337b5d3158d0af71ddec1159d9ca690\"\n    }\n    */\nreturn newmsg;",
+        "func": "let getDataExtraccionRequest = {};\nlet newmsg = {\n    server: \"https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService\",\n    options: {\n        overrideRootElement: {\n            \"namespace\": \"get\",\n            \"xmlnsAttributes\": [{\n                \"name\": \"xmlns:get\",\n            \"value\": \"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/GetDataExtraccionRequest\"\n            }]\n        }\n    },\n    headers: {},\n    payload: {\n            codigoDeLaObra: \"OB-0901-78\",\n            numeroComprobante: \"a337b5d3158d0af71ddec1159d9ca690\"\n    }\n};\n/*\npayload: {\n            codigoDeLaObra: \"OB-0901-78\",\n            numeroComprobante: \"a337b5d3158d0af71ddec1159d9ca690\"\n    }\n    */\nreturn newmsg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
