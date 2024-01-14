@@ -558,5 +558,76 @@
                 "file": "/data/node_modules/node-red-contrib-postgresql/postgresql.js"
             }
         }
+    },
+    "node-red-contrib-soap-plus": {
+        "name": "node-red-contrib-soap-plus",
+        "version": "1.2.0",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "soap": {
+                "name": "soap",
+                "types": [
+                    "soap request plus"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-soap-plus",
+                "file": "/data/node_modules/node-red-contrib-soap-plus/soap-node-plus.js"
+            },
+            "soap-config-plus": {
+                "name": "soap-config-plus",
+                "types": [
+                    "soap-config-plus"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-soap-plus",
+                "file": "/data/node_modules/node-red-contrib-soap-plus/soap-config-plus.js"
+            }
+        }
+    },
+    "node-red-contrib-webservices": {
+        "name": "node-red-contrib-webservices",
+        "version": "1.0.5",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "soap-server": {
+                "name": "soap-server",
+                "types": [
+                    "soap-server"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-webservices",
+                "file": "/data/node_modules/node-red-contrib-webservices/soap-server.js"
+            },
+            "soap-response": {
+                "name": "soap-response",
+                "types": [
+                    "soap-response"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-webservices",
+                "file": "/data/node_modules/node-red-contrib-webservices/soap-response.js"
+            },
+            "soap-request": {
+                "name": "soap-request",
+                "types": [
+                    "soap-request"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-webservices",
+                "file": "/data/node_modules/node-red-contrib-webservices/soap-request.js"
+            }
+        }
     }
 }
