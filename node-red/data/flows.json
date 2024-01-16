@@ -146,7 +146,7 @@
     {
         "id": "80b99021.9a4",
         "type": "node-red-contrib-whatsapp-cmb-account",
-        "name": "WhatsApp API Account"
+        "name": "PI"
     },
     {
         "id": "b23d8359c5c9ebfb",
@@ -174,31 +174,9 @@
         "passwordFieldType": "env"
     },
     {
-        "id": "81f4a74cd24f20de",
-        "type": "soap-config-plus",
-        "wsdl": "http://dneonline.com/calculator.asmx?WSDL",
-        "auth": "0",
-        "user": "",
-        "pass": "",
-        "key": "",
-        "cert": "",
-        "token": ""
-    },
-    {
         "id": "22d655552657cf36",
         "type": "soap-config-plus",
         "wsdl": "https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService",
-        "auth": "0",
-        "user": "",
-        "pass": "",
-        "key": "",
-        "cert": "",
-        "token": ""
-    },
-    {
-        "id": "98de054f4655bf0f",
-        "type": "soap-config-plus",
-        "wsdl": "https://www.dataaccess.com/webservicesserver/numberconversion.wso",
         "auth": "0",
         "user": "",
         "pass": "",
@@ -1604,72 +1582,6 @@
         "wires": []
     },
     {
-        "id": "b8f23850488e6c9d",
-        "type": "function",
-        "z": "c19fc8a18bff1dd0",
-        "name": "ArgSOAP",
-        "func": "// Get data from sensor and send data to SOAP server each x interval of time.\nlet A = 1;\nlet B = 2;\n\nlet newmsg = {\n    server: \"http://www.dneonline.com/calculator.asmx?wsdl\",\n    options: {},\n    headers: {},\n    payload: { intA: A, intB: B }\n};\n\n\nreturn newmsg;\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 220,
-        "wires": [
-            [
-                "860bd7753ad194d6"
-            ]
-        ]
-    },
-    {
-        "id": "a1c6c6571674b5b7",
-        "type": "debug",
-        "z": "c19fc8a18bff1dd0",
-        "name": "ResponseSOAP",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "c7340578c50653b0",
-        "type": "inject",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 220,
-        "wires": [
-            [
-                "b8f23850488e6c9d"
-            ]
-        ]
-    },
-    {
         "id": "09c5185b84028af8",
         "type": "inject",
         "z": "c19fc8a18bff1dd0",
@@ -1711,7 +1623,7 @@
         "tls": true,
         "name": "philippe.ilharreguy@gmail.com",
         "dname": "PI email",
-        "x": 320,
+        "x": 260,
         "y": 120,
         "wires": []
     },
@@ -1729,7 +1641,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 700,
-        "y": 360,
+        "y": 220,
         "wires": []
     },
     {
@@ -1745,7 +1657,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 360,
+        "y": 220,
         "wires": [
             [
                 "dd90b7fa6e9340fa"
@@ -1774,197 +1686,10 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 360,
-        "wires": [
-            [
-                "68926513297359aa"
-            ]
-        ]
-    },
-    {
-        "id": "860bd7753ad194d6",
-        "type": "soap request plus",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "topic": "",
-        "wsdl": "81f4a74cd24f20de",
-        "method": "Add",
-        "x": 510,
         "y": 220,
         "wires": [
             [
-                "a1c6c6571674b5b7"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "0af4ebf7dc8b6fcf",
-        "type": "function",
-        "z": "c19fc8a18bff1dd0",
-        "name": "ArgSOAP",
-        "func": "\nlet newmsg = {\n    server: \"https://www.dataaccess.com/webservicesserver/numberconversion.wso\",\n    options: {},\n    headers: {},\n    payload: {\n        ubiNum: 124\n    }\n};\n\n\nreturn newmsg;\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 280,
-        "wires": [
-            [
-                "f90788be73cc17d2"
-            ]
-        ]
-    },
-    {
-        "id": "513a9e5a5c3b0a52",
-        "type": "debug",
-        "z": "c19fc8a18bff1dd0",
-        "name": "ResponseSOAP",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "f70ee812c391059f",
-        "type": "inject",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 280,
-        "wires": [
-            [
-                "0af4ebf7dc8b6fcf"
-            ]
-        ]
-    },
-    {
-        "id": "f90788be73cc17d2",
-        "type": "soap request plus",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "topic": "",
-        "wsdl": "98de054f4655bf0f",
-        "method": "NumberToWords",
-        "x": 510,
-        "y": 280,
-        "wires": [
-            [
-                "513a9e5a5c3b0a52"
-            ],
-            [
-                "513a9e5a5c3b0a52"
-            ]
-        ]
-    },
-    {
-        "id": "920a8fb38711d247",
-        "type": "debug",
-        "z": "c19fc8a18bff1dd0",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "31eb5f3333ede832",
-        "type": "function",
-        "z": "c19fc8a18bff1dd0",
-        "name": "PutSOAP",
-        "func": "\nlet newmsg = {\n    server: \"https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService?wsdl\",\n    options: {\n        overrideRootElement: {\n            \"namespace\": \"aut\",\n            \"xmlnsAttributes\": [{\n                \"name\": \"xmlns:aut\",\n                \"value\": \"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\"\n            }]\n        }\n    },\n    headers: {\n        \n    },\n    payload: {\n        /*authDataUsuario: {\n            idUsuario: {\n                rut: \"16338539-2\"\n            },\n            password: \"Ck4k4l40=\"\n        }*/\n    }\n};\n\nreturn newmsg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 420,
-        "wires": [
-            [
-                "30b38562b6608709"
-            ]
-        ]
-    },
-    {
-        "id": "b7bee7b287c3d4e2",
-        "type": "inject",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 420,
-        "wires": [
-            [
-                "31eb5f3333ede832"
-            ]
-        ]
-    },
-    {
-        "id": "30b38562b6608709",
-        "type": "soap request plus",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "topic": "",
-        "wsdl": "22d655552657cf36",
-        "method": "authSendDataExtraccionOp",
-        "x": 510,
-        "y": 420,
-        "wires": [
-            [
-                "920a8fb38711d247"
-            ],
-            [
-                "920a8fb38711d247"
+                "68926513297359aa"
             ]
         ]
     },
@@ -1977,7 +1702,7 @@
         "wsdl": "22d655552657cf36",
         "method": "getDataExtraccionOp",
         "x": 510,
-        "y": 360,
+        "y": 220,
         "wires": [
             [
                 "9ae215cb4e377e36"
@@ -2004,7 +1729,7 @@
         "senderr": false,
         "headers": [],
         "x": 430,
-        "y": 500,
+        "y": 300,
         "wires": [
             [
                 "cb19acad88ea8ad8"
@@ -2024,7 +1749,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 500,
+        "y": 300,
         "wires": [
             [
                 "89a9d9dc6ab10b5c"
@@ -2045,7 +1770,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 720,
-        "y": 560,
+        "y": 360,
         "wires": []
     },
     {
@@ -2057,7 +1782,7 @@
         "attr": "",
         "chr": "",
         "x": 570,
-        "y": 500,
+        "y": 300,
         "wires": [
             [
                 "5ad961939d054b56"
@@ -2077,7 +1802,7 @@
         "finalize": "",
         "libs": [],
         "x": 730,
-        "y": 500,
+        "y": 300,
         "wires": [
             [
                 "ed77c53d5e36c072"
@@ -2144,7 +1869,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 620,
+        "y": 420,
         "wires": [
             [
                 "923a6d21aa518c7a"
@@ -2162,7 +1887,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 280,
-        "y": 620,
+        "y": 420,
         "wires": [
             [
                 "c7ccf197ba79aba1"
@@ -2191,7 +1916,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 500,
+        "y": 300,
         "wires": [
             [
                 "b5bf5f268a9ed3a7"
@@ -2215,7 +1940,7 @@
         "senderr": false,
         "headers": [],
         "x": 590,
-        "y": 620,
+        "y": 420,
         "wires": [
             [
                 "a06a4d89b48eebd0"
@@ -2235,7 +1960,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 620,
+        "y": 420,
         "wires": [
             [
                 "aa1abbf650e2eec6"
@@ -2255,8 +1980,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 680,
+        "x": 780,
+        "y": 480,
         "wires": []
     },
     {
@@ -2267,8 +1992,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 450,
-        "y": 680,
+        "x": 430,
+        "y": 480,
         "wires": [
             [
                 "aa3a6b3239d373ef"
@@ -2287,8 +2012,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 680,
+        "x": 610,
+        "y": 480,
         "wires": [
             [
                 "e642b7fafc2293e6"
