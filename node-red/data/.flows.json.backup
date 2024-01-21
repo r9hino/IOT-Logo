@@ -1148,7 +1148,7 @@
         "timeout": "3",
         "requests": "3",
         "x": 240,
-        "y": 1220,
+        "y": 1240,
         "wires": [
             [
                 "9b391cacec3675a5"
@@ -1177,7 +1177,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 1220,
+        "y": 1240,
         "wires": [
             [
                 "0232095f769d9c51"
@@ -1197,7 +1197,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1220,
+        "y": 1240,
         "wires": [
             [
                 "d041b84986b89802"
@@ -1217,7 +1217,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 590,
-        "y": 1240,
+        "y": 1260,
         "wires": [
             [
                 "8cf4219a27eea7b5",
@@ -1244,7 +1244,7 @@
         "repair": false,
         "outputs": 2,
         "x": 590,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [],
             [
@@ -1262,7 +1262,7 @@
             "e4bec3a76a413df7"
         ],
         "x": 80,
-        "y": 1260,
+        "y": 1280,
         "wires": [
             [
                 "5fb634a2da765abf"
@@ -1282,7 +1282,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1260,
+        "y": 1280,
         "wires": [
             [
                 "d041b84986b89802"
@@ -1293,9 +1293,9 @@
         "id": "49b9802401c46d75",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
-        "name": "Check communication between gateway and PLC",
+        "name": "Check communication between gateway and PLC. Send alert only after x seconds of interruption.",
         "info": "",
-        "x": 200,
+        "x": 330,
         "y": 1180,
         "wires": []
     },
@@ -1310,7 +1310,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 840,
-        "y": 1240,
+        "y": 1260,
         "wires": [
             []
         ]
@@ -1623,7 +1623,7 @@
         "tls": true,
         "name": "philippe.ilharreguy@gmail.com",
         "dname": "PI email",
-        "x": 320,
+        "x": 260,
         "y": 120,
         "wires": []
     },
