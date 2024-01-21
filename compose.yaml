@@ -49,7 +49,7 @@ services:
 
   # docker exec -it nodered bash
   nodered:
-    image: nodered/node-red:latest
+    image: custom-node-red
     container_name: nodered
     restart: always
     ports:
