@@ -12,6 +12,11 @@
 version: "3.8"
 
 services:
+  custom_image:
+    image: custom-node-red
+    build:
+      context: .
+
   # https://docs.timescale.com/self-hosted/latest/install/installation-docker/#install-self-hosted-timescaledb-from-a-pre-built-container
   # Volume direction inside container:
   #     timescaledb-ha -> /home/postgres/pgdata/data
