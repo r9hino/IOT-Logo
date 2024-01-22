@@ -15,8 +15,7 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 ### Containers initialization with docker compose
 1. Go to project folder: ```cd /home/pi/IOT```
 2. Add the .env file.
-3. Build custom image and initialize all containers: ```docker compose up -d --build custom_image```
-4. Remove original node-red docker image as is not longer need it: ```docker rmi nodered/node-red```
+3. Build custom image from Dockerfile and initialize all containers: ```docker compose up -d```
 5. Additional checks:
     - Check that Grafana has defined userid to 1000.
     - [Add login to node-red](https://nodered.org/docs/user-guide/runtime/securing-node-red):

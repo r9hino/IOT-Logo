@@ -12,11 +12,6 @@
 version: "3.8"
 
 services:
-  custom_image:
-    image: custom-node-red
-    build:
-      context: .
-
   # https://docs.timescale.com/self-hosted/latest/install/installation-docker/#install-self-hosted-timescaledb-from-a-pre-built-container
   # Volume direction inside container:
   #     timescaledb-ha -> /home/postgres/pgdata/data
@@ -54,6 +49,10 @@ services:
 
   # docker exec -it nodered bash
   nodered:
+    # Build custom node-red with preinstalled modules
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: custom-node-red
     container_name: nodered
     restart: always
@@ -76,5 +75,5 @@ networks:
     ipam:
       driver: default
       config:
-        # This will assign ip 172.30.0.1 to host.
+        # This will assign ip 172.30.0.1 to host
         - subnet: "172.30.0.0/24"
