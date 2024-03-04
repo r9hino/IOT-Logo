@@ -22,6 +22,12 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
         * Enter node-red cointainer: ```docker exec -it nodered /bin/bash```
         * Edit /data/settings.js file: ```nano /data/settings.js```
 
+### Updating images and containers in docker
+1. Stop containers: ```docker compose down```
+2. Remove images: ```docker images``` & ```docker rmi id```
+3. docker pull new images: ```docker pull image```
+4. Run containers: ```docker compose up -d```
+
 ## Github commands
 1. Clone repository: ```git clone -b main https://github.com/r9hino/ACM.git```
 2. Github commit:

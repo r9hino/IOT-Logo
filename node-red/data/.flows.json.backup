@@ -50,7 +50,7 @@
         "id": "9f820a4ae6200aba",
         "type": "s7 endpoint",
         "transport": "iso-on-tcp",
-        "address": "192.168.0.3",
+        "address": "192.168.1.3",
         "port": "102",
         "rack": "0",
         "slot": "2",
@@ -1641,7 +1641,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 700,
-        "y": 220,
+        "y": 240,
         "wires": []
     },
     {
@@ -1657,7 +1657,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 220,
+        "y": 240,
         "wires": [
             [
                 "dd90b7fa6e9340fa"
@@ -1686,7 +1686,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 220,
+        "y": 240,
         "wires": [
             [
                 "68926513297359aa"
@@ -1702,7 +1702,7 @@
         "wsdl": "22d655552657cf36",
         "method": "getDataExtraccionOp",
         "x": 510,
-        "y": 220,
+        "y": 240,
         "wires": [
             [
                 "9ae215cb4e377e36"
@@ -1880,17 +1880,18 @@
         "id": "923a6d21aa518c7a",
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
-        "name": "Query flujo L/s",
-        "query": "select time as timestamp,\n\tTO_CHAR(time, 'DD-MM-YYYY') AS date,\n    TO_CHAR(time, 'HH24:MI:SS') AS time,\n   measurement from sensor_log \nwhere sensor_id = 1 order by timestamp desc\nlimit 1;",
+        "name": "Query Flujo L/min - Volumen m3",
+        "query": "WITH \nsensor1 AS (\n    SELECT time,\n    measurement \n    FROM sensor_log \n    WHERE sensor_id = 1 \n    ORDER BY time DESC \n    LIMIT 1\n),\nsensor2 AS (\n    SELECT measurement \n    FROM sensor_log \n    WHERE sensor_id = 2 \n    ORDER BY time DESC \n    LIMIT 1\n)\nSELECT\n\tsensor1.time as timestamp,\n\tTO_CHAR(sensor1.time, 'DD-MM-YYYY') AS date,\n    TO_CHAR(sensor1.time, 'HH24:MI:SS') AS time,\n    sensor1.measurement AS \"flujo_L_min\", \n    sensor2.measurement AS volumen_m3\nFROM sensor1, sensor2",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 280,
+        "x": 330,
         "y": 420,
         "wires": [
             [
-                "c7ccf197ba79aba1"
+                "c7ccf197ba79aba1",
+                "e642b7fafc2293e6"
             ]
         ]
     },
@@ -1939,7 +1940,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 590,
+        "x": 730,
         "y": 420,
         "wires": [
             [
@@ -1952,18 +1953,19 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "PutSOAP",
-        "func": "let timestamp = msg.payload[0].timestamp;\nlet date = msg.payload[0].date;\nlet time = msg.payload[0].time;\nlet measurement = msg.payload[0].measurement;\n\nmsg.headers = {\n    'Content-Type': 'text/xml;charset=UTF-8',\n    'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp'\n};\n\nmsg.payload = \n`<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>OB-1401-255</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>Ck4k4l40=</aut:password>\n         </aut:authDataUsuario>\n         <!--You have a CHOICE of the next 2 items at this level-->\n         <!--Optional:-->\n         <aut:authDataExtraccionSuperficial>\n            <aut:fechaMedicion>${date}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:caudal>${measurement}</aut:caudal>\n            <aut:alturaLimnimetrica>1</aut:alturaLimnimetrica>\n         </aut:authDataExtraccionSuperficial>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\nreturn msg;\n",
+        "func": "let timestamp = msg.payload[0].timestamp.toISOString().split('.')[0] + 'Z';\n//timestamp = timestamp.getFullYear() + '-' +  timestamp.getMonth() + '-' + timestamp.getDate() + 'T' + ;\nlet date = msg.payload[0].date;\nlet time = msg.payload[0].time;\nlet volumen_m3 = msg.payload[0].volumen_m3;\nlet flujo_L_s = (msg.payload[0].flujo_L_min/60).toFixed(2);\n//flujo_L_s = Math.round((flujo_L_s + Number.EPSILON) * 100) / 100;\n\nmsg.headers = {\n    'Content-Type': 'text/xml;charset=UTF-8',\n    'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n    'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload = \n`<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>OB-1401-255</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>10.01</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
+        "x": 560,
         "y": 420,
         "wires": [
             [
-                "aa1abbf650e2eec6"
+                "aa1abbf650e2eec6",
+                "e642b7fafc2293e6"
             ]
         ]
     },
@@ -1980,7 +1982,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
+        "x": 820,
         "y": 480,
         "wires": []
     },
