@@ -50,8 +50,8 @@
         "id": "9f820a4ae6200aba",
         "type": "s7 endpoint",
         "transport": "iso-on-tcp",
-        "address": "192.168.1.3",
-        "port": "102",
+        "address": "${PLC_PRIVATE_IP}",
+        "port": "${PLC_PORT}",
         "rack": "0",
         "slot": "2",
         "localtsaphi": "02",
@@ -1144,7 +1144,7 @@
         "type": "conf ping",
         "z": "f6f2187d.f17ca8",
         "name": "Ping PLC",
-        "host": "192.168.0.3",
+        "host": "${PLC_PRIVATE_IP}",
         "timeout": "3",
         "requests": "3",
         "x": 240,
@@ -1169,14 +1169,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "15",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 90,
         "y": 1240,
         "wires": [
             [
@@ -1200,7 +1200,8 @@
         "y": 1240,
         "wires": [
             [
-                "d041b84986b89802"
+                "d041b84986b89802",
+                "62fcf4c0b503c5b9"
             ]
         ]
     },
@@ -1274,18 +1275,18 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "Status checker 2",
-        "func": "// Check the communication status from the PLC ping.\nif (msg.status.text == 'offline'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';\n    msg.payload = false;\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\nelse if(msg.status.text != 'connecting'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n    msg.payload = true;\n}\n\nreturn msg;",
+        "func": "// Check the communication status from the PLC ping.\nif (msg.status.text == 'offline'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';\n    msg.payload = false;\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\nelse if(msg.status.text != 'connecting'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n    msg.payload = true;\n    msg.reset = true; // Delete previous message held on delay node if time is less than 5s.\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 270,
         "y": 1280,
         "wires": [
             [
-                "d041b84986b89802"
+                "29e021f3d3756614"
             ]
         ]
     },
@@ -1562,6 +1563,64 @@
         ],
         "x": 695,
         "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "29e021f3d3756614",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 1280,
+        "wires": [
+            [
+                "d041b84986b89802",
+                "974e5c4d7cee7b63"
+            ]
+        ]
+    },
+    {
+        "id": "62fcf4c0b503c5b9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "974e5c4d7cee7b63",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 1360,
         "wires": []
     },
     {
@@ -1890,8 +1949,7 @@
         "y": 420,
         "wires": [
             [
-                "c7ccf197ba79aba1",
-                "e642b7fafc2293e6"
+                "c7ccf197ba79aba1"
             ]
         ]
     },
@@ -1953,7 +2011,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "PutSOAP",
-        "func": "let timestamp = msg.payload[0].timestamp.toISOString().split('.')[0] + 'Z';\n//timestamp = timestamp.getFullYear() + '-' +  timestamp.getMonth() + '-' + timestamp.getDate() + 'T' + ;\nlet date = msg.payload[0].date;\nlet time = msg.payload[0].time;\nlet volumen_m3 = msg.payload[0].volumen_m3;\nlet flujo_L_s = (msg.payload[0].flujo_L_min/60).toFixed(2);\n//flujo_L_s = Math.round((flujo_L_s + Number.EPSILON) * 100) / 100;\n\nmsg.headers = {\n    'Content-Type': 'text/xml;charset=UTF-8',\n    'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n    'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload = \n`<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>OB-1401-255</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>10.01</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
+        "func": "const timestamp = msg.payload[0].timestamp.toISOString().slice(0, 19) + 'Z'; //localDateTimeString = localDateTimeString.timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: \"America/Santiago\", hour12: false };\nconst date = msg.payload[0].timestamp.toLocaleDateString(\"en-GB\", options).replaceAll(\"/\", \"-\");\nconst time = msg.payload[0].timestamp.toLocaleTimeString(\"en-GB\", options);\nconst volumen_m3 = msg.payload[0].volumen_m3;\nconst flujo_L_s = (msg.payload[0].flujo_L_min/60).toFixed(2);\n\nmsg.headers = {\n    'Content-Type': 'text/xml;charset=UTF-8',\n    'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n    'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload = \n`<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>OB-1401-255</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${flujo_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1964,8 +2022,7 @@
         "y": 420,
         "wires": [
             [
-                "aa1abbf650e2eec6",
-                "e642b7fafc2293e6"
+                "aa1abbf650e2eec6"
             ]
         ]
     },
@@ -1982,7 +2039,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
+        "x": 720,
         "y": 480,
         "wires": []
     },
@@ -1994,7 +2051,7 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 430,
+        "x": 350,
         "y": 480,
         "wires": [
             [
@@ -2014,7 +2071,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
+        "x": 530,
         "y": 480,
         "wires": [
             [
