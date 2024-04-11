@@ -139,7 +139,11 @@
             },
             {
                 "addr": "DB1,DWORD5",
-                "name": "R-Volumen"
+                "name": "R-Volumen-m3"
+            },
+            {
+                "addr": "DB1,DWORD9",
+                "name": "R-Volumen-100L"
             }
         ]
     },
@@ -450,14 +454,14 @@
         "z": "f6f2187d.f17ca8",
         "endpoint": "9f820a4ae6200aba",
         "mode": "single",
-        "variable": "R-Volumen",
+        "variable": "R-Volumen-m3",
         "diff": true,
         "name": "R-Volumen m3",
         "x": 160,
         "y": 740,
         "wires": [
             [
-                "6c9da29d426b490e"
+                "419508e0091305d8"
             ]
         ]
     },
@@ -504,7 +508,7 @@
         "diff": true,
         "name": "R-Q1 Contactor bomba 1",
         "x": 130,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
                 "456ef010663bd89e"
@@ -521,7 +525,7 @@
         "diff": true,
         "name": "R-Q2 Contactor bomba 2",
         "x": 130,
-        "y": 860,
+        "y": 940,
         "wires": [
             [
                 "3fa3a438efece258"
@@ -611,7 +615,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 820,
-        "y": 740,
+        "y": 780,
         "wires": [
             []
         ]
@@ -627,7 +631,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 850,
-        "y": 800,
+        "y": 880,
         "wires": [
             []
         ]
@@ -643,7 +647,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 850,
-        "y": 860,
+        "y": 940,
         "wires": [
             []
         ]
@@ -691,7 +695,7 @@
         "diff": true,
         "name": "R-Q3 Descebo bomba 1",
         "x": 130,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "98a78b9c0a47453f"
@@ -708,7 +712,7 @@
         "diff": true,
         "name": "R-Q4 Descebo bomba 2",
         "x": 130,
-        "y": 980,
+        "y": 1060,
         "wires": [
             [
                 "dad7b6edf8739758"
@@ -726,7 +730,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 920,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -779,7 +783,7 @@
         "diff": true,
         "name": "R-I7 Falla termica bomba 1",
         "x": 130,
-        "y": 1040,
+        "y": 1120,
         "wires": [
             [
                 "99d331f8bb834be8"
@@ -796,7 +800,7 @@
         "diff": true,
         "name": "R-I8 Falla termica bomba 2",
         "x": 130,
-        "y": 1100,
+        "y": 1180,
         "wires": [
             [
                 "8a60685fce5357a8"
@@ -966,7 +970,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1100,
+        "y": 1180,
         "wires": [
             [
                 "91334c2980e70d2b"
@@ -993,7 +997,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1040,
+        "y": 1120,
         "wires": [
             [
                 "aa90b1dd3cf2d1e3"
@@ -1020,7 +1024,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 980,
+        "y": 1060,
         "wires": [
             [
                 "82032042c88fc8d5"
@@ -1047,7 +1051,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "d5a70810fe6f354d"
@@ -1068,7 +1072,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1089,7 +1093,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 980,
+        "y": 1060,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1110,7 +1114,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1040,
+        "y": 1120,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1131,7 +1135,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1100,
+        "y": 1180,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1148,7 +1152,7 @@
         "timeout": "3",
         "requests": "3",
         "x": 240,
-        "y": 1240,
+        "y": 1320,
         "wires": [
             [
                 "9b391cacec3675a5"
@@ -1177,7 +1181,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 90,
-        "y": 1240,
+        "y": 1320,
         "wires": [
             [
                 "0232095f769d9c51"
@@ -1197,12 +1201,9 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1240,
+        "y": 1320,
         "wires": [
-            [
-                "d041b84986b89802",
-                "62fcf4c0b503c5b9"
-            ]
+            []
         ]
     },
     {
@@ -1218,7 +1219,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 590,
-        "y": 1260,
+        "y": 1340,
         "wires": [
             [
                 "8cf4219a27eea7b5",
@@ -1245,7 +1246,7 @@
         "repair": false,
         "outputs": 2,
         "x": 590,
-        "y": 1220,
+        "y": 1300,
         "wires": [
             [],
             [
@@ -1260,10 +1261,10 @@
         "z": "f6f2187d.f17ca8",
         "name": "",
         "scope": [
-            "e4bec3a76a413df7"
+            "e972a6f1f5d6c9c2"
         ],
         "x": 80,
-        "y": 1280,
+        "y": 1360,
         "wires": [
             [
                 "5fb634a2da765abf"
@@ -1275,7 +1276,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "Status checker 2",
-        "func": "let status = msg.status.text;\n\n// Check the communication status from the PLC ping.\nif (status == 'offline'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';\n    msg.payload = false;\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\nelse if(status == 'connecting'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'connecting';\n    msg.payload = false;\n}\nelse if(status == 'online'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n    msg.payload = true;\n    msg.reset = true; // Delete previous message held on delay node if time is less than 5s.\n}\n\nreturn msg;",
+        "func": "let previous_payload = context.get('previous_payload') || false;\nlet status = msg.status.text;\n\n// Check the communication status from the PLC ping.\nif(status == 'online' || status == 'true' || status == 'false'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'online';\n    msg.payload = true;\n    //msg.reset = true; // Delete previous message held on delay node if time is less than 5s.\n}\nelse if (status == 'offline'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'offline';\n    msg.payload = false;\n    msg.alert_message = 'Perdida comunicacion con PLC caseta rio';\n}\nelse if(status == 'connecting'){\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.status = 'connecting';\n    msg.payload = false;\n}\nelse{\n    msg.actuator_id = 3;\n    msg.actuator_state = true; // PLC is working\n    msg.payload = false;\n}\n\nif(previous_payload != msg.payload){\n    context.set('previous_payload', msg.payload);\n    return msg;\n}\nelse{\n    return null;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1283,7 +1284,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 1280,
+        "y": 1360,
         "wires": [
             [
                 "29e021f3d3756614"
@@ -1297,7 +1298,7 @@
         "name": "Check communication between gateway and PLC. Send alert only after x seconds of interruption.",
         "info": "",
         "x": 330,
-        "y": 1180,
+        "y": 1260,
         "wires": []
     },
     {
@@ -1311,7 +1312,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 840,
-        "y": 1260,
+        "y": 1340,
         "wires": [
             []
         ]
@@ -1327,7 +1328,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 1180,
+        "y": 1280,
         "wires": [
             []
         ]
@@ -1345,7 +1346,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
                 "a5e8ca678847893b"
@@ -1365,7 +1366,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 860,
+        "y": 940,
         "wires": [
             [
                 "b0cebffb90e675c8"
@@ -1464,11 +1465,12 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 310,
-        "y": 740,
+        "x": 550,
+        "y": 840,
         "wires": [
             [
-                "ea7cce0b31c42e8e"
+                "ea7cce0b31c42e8e",
+                "8c8448af760adcf8"
             ]
         ]
     },
@@ -1485,7 +1487,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "33c3983fc071c9ec"
@@ -1505,7 +1507,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 980,
+        "y": 1060,
         "wires": [
             [
                 "718f15291eb3cc34"
@@ -1525,7 +1527,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1040,
+        "y": 1120,
         "wires": [
             [
                 "d9b290fe2697d0aa"
@@ -1545,7 +1547,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1100,
+        "y": 1180,
         "wires": [
             [
                 "efe91050b8b1939b"
@@ -1562,7 +1564,7 @@
             "9ce4b6a8c1e9af2c"
         ],
         "x": 695,
-        "y": 1080,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1583,32 +1585,32 @@
         "allowrate": false,
         "outputs": 1,
         "x": 440,
-        "y": 1280,
+        "y": 1360,
         "wires": [
             [
-                "d041b84986b89802",
-                "974e5c4d7cee7b63"
+                "d041b84986b89802"
             ]
         ]
     },
     {
-        "id": "62fcf4c0b503c5b9",
-        "type": "debug",
+        "id": "10fa1a6bb78712c4",
+        "type": "s7 in",
         "z": "f6f2187d.f17ca8",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
-        "y": 1320,
-        "wires": []
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-Volumen-100L",
+        "diff": true,
+        "name": "R-Volumen 100L",
+        "x": 160,
+        "y": 800,
+        "wires": [
+            [
+                "34f39b5a54ab12dc"
+            ]
+        ]
     },
     {
-        "id": "974e5c4d7cee7b63",
+        "id": "8c8448af760adcf8",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "debug 10",
@@ -1616,12 +1618,155 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 1360,
+        "x": 740,
+        "y": 840,
         "wires": []
+    },
+    {
+        "id": "55b8c0f77196eac6",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "RetrieveVolume",
+        "func": "// Update context values\n//context.set(msg.topic, msg.payload);\n\n// Get latest context vaues\nlet volume_m3 = flow.get('volume_m3');\nlet volume_100L = flow.get('volume_100L');\n\nlet volume = 0;\n\nif(volume_m3 !== undefined && volume_100L !== undefined){\n    volume = volume_m3 + volume_100L/10;\n    return {payload: volume};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 840,
+        "wires": [
+            [
+                "6c9da29d426b490e"
+            ]
+        ]
+    },
+    {
+        "id": "419508e0091305d8",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "volume_m3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "34f39b5a54ab12dc",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "volume_100L",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "523005431e25d077",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 840,
+        "wires": [
+            [
+                "55b8c0f77196eac6"
+            ]
+        ]
+    },
+    {
+        "id": "f16690b48d60a7e6",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "RetrieveVolume",
+        "func": "// Get the messages by topic\nlet messages = context.get('messages') || {};\n\nif(msg.topic == 'R-Volumen-m3'){\n    messages['R-Volumen-m3'] = msg.payload;\n    context.set('messages', messages);\n}\nif(msg.topic == 'R-Volumen-100L'){\n    messages['R-Volumen-100L'] = msg.payload;\n    context.set('messages', messages);\n}\n\n//context.set('messages', messages);\n\nreturn { payload: context.get('messages') }\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d23175f90f8a2aa4",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "200",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 750,
+        "y": 740,
+        "wires": [
+            [
+                "f16690b48d60a7e6"
+            ]
+        ]
     },
     {
         "id": "b234123a.c95f5",
@@ -1636,7 +1781,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 530,
+        "x": 510,
         "y": 60,
         "wires": []
     },
@@ -1882,7 +2027,7 @@
         "phonenumberinputtypemessage": "msg",
         "inputtypemessage": "msg",
         "rejectssl": true,
-        "x": 340,
+        "x": 320,
         "y": 60,
         "wires": [
             [
@@ -1898,7 +2043,7 @@
         "links": [
             "fce21711086bb35d"
         ],
-        "x": 195,
+        "x": 175,
         "y": 60,
         "wires": [
             [
