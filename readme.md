@@ -7,10 +7,11 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 3. Connect to DGA.
 4. Phone numbers and API key on environment variables?
 5. Programmatically set user id on compose.yaml file for Grafana.
+6. Create database structure automatically when initializing Timescale container..
 
 ## Setting up the gateway
 ### Get project repository from Github
-1. Go to home directory on linux
+1. Use ubuntu as default user, then go to home directory
 2. Clone repository: ```git clone https://github.com/r9hino/IOT.git```
 
 ### Containers initialization with docker compose
