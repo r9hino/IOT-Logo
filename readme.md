@@ -6,6 +6,7 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 2. Send Whatsapp to list of phone numbers.
 3. Connect to DGA.
 4. Phone numbers and API key on environment variables?
+5. Programmatically set user id on compose.yaml file for Grafana.
 
 ## Setting up the gateway
 ### Get project repository from Github
@@ -15,12 +16,15 @@ Gateway for IOT application using Docker containers: timescaleDB, node-red, Graf
 ### Containers initialization with docker compose
 1. Go to project folder: ```cd /home/pi/IOT```
 2. Add the .env file.
-3. Build custom image from Dockerfile and initialize all containers: ```docker compose up -d```
-5. Additional checks:
+3. Check ownership of node-red/data folder on server side, it must be 1000:1000: ```sudo chown -R 1000:1000 path/to/your/node-red/data```
+4. Check user id on linux and use the same id for user in the Grafana section of compose.yaml file: ```id -u```
+5. Build custom image from Dockerfile and initialize all containers: ```docker compose up -d```
+6. Additional checks:
     - Check that Grafana has defined userid to 1000.
     - [Add login to node-red](https://nodered.org/docs/user-guide/runtime/securing-node-red):
         * Enter node-red cointainer: ```docker exec -it nodered /bin/bash```
         * Edit /data/settings.js file: ```nano /data/settings.js```
+        * Add user and hashed password in the section "adminAuth". For hashing the password, inside the container, use: ```node-red admin hash-pw```
 
 ### Updating images and containers in docker
 1. Stop containers: ```docker compose down```

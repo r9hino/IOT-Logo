@@ -7,9 +7,8 @@
 #   Start all containers: docker compose up -d
 #
 #   Docker commands
-#     docker run -p 51880:1880 -v /home/pi/IOT/node-red/data:/data --name nodered nodered/node-red
+#     docker run -p 51880:1880 -v /home/pi/IOT/node-red/data:/data --name nodered custom-node-red
 ################################################################################
-version: "3.8"
 
 services:
   # https://docs.timescale.com/self-hosted/latest/install/installation-docker/#install-self-hosted-timescaledb-from-a-pre-built-container
@@ -36,7 +35,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     # Check user id: "id -u"
-    user: ${UID}
+    user: "1002"
     ports:
       - "53000:3000"
     networks:
