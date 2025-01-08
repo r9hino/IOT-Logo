@@ -35,7 +35,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     # Check user id: "id -u"
-    user: "1002"
+    user: "1000"
     ports:
       - "53000:3000"
     networks:
