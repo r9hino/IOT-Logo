@@ -1287,7 +1287,7 @@
         "y": 1360,
         "wires": [
             [
-                "29e021f3d3756614"
+                "ff0526a7882c54e1"
             ]
         ]
     },
@@ -1568,31 +1568,6 @@
         "wires": []
     },
     {
-        "id": "29e021f3d3756614",
-        "type": "delay",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 440,
-        "y": 1360,
-        "wires": [
-            [
-                "d041b84986b89802"
-            ]
-        ]
-    },
-    {
         "id": "10fa1a6bb78712c4",
         "type": "s7 in",
         "z": "f6f2187d.f17ca8",
@@ -1766,6 +1741,54 @@
             [
                 "f16690b48d60a7e6"
             ]
+        ]
+    },
+    {
+        "id": "ff0526a7882c54e1",
+        "type": "trigger",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "pay",
+        "duration": "10",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 450,
+        "y": 1360,
+        "wires": [
+            [
+                "d041b84986b89802"
+            ]
+        ]
+    },
+    {
+        "id": "29e021f3d3756614",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 1480,
+        "wires": [
+            []
         ]
     },
     {
