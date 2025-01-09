@@ -504,7 +504,7 @@
         "z": "f6f2187d.f17ca8",
         "endpoint": "9f820a4ae6200aba",
         "mode": "single",
-        "variable": "W-Q1 Contactor bomba 1",
+        "variable": "R-Q1 Contactor bomba 1",
         "diff": true,
         "name": "R-Q1 Contactor bomba 1",
         "x": 130,
@@ -521,7 +521,7 @@
         "z": "f6f2187d.f17ca8",
         "endpoint": "9f820a4ae6200aba",
         "mode": "single",
-        "variable": "W-Q2 Contactor bomba 2",
+        "variable": "R-Q2 Contactor bomba 2",
         "diff": true,
         "name": "R-Q2 Contactor bomba 2",
         "x": 130,
@@ -1232,26 +1232,23 @@
         "type": "switch",
         "z": "f6f2187d.f17ca8",
         "name": "",
-        "property": "payload",
+        "property": "status",
         "propertyType": "msg",
         "rules": [
             {
-                "t": "true"
-            },
-            {
-                "t": "false"
+                "t": "eq",
+                "v": "offline",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
+        "outputs": 1,
         "x": 590,
         "y": 1300,
         "wires": [
-            [],
             [
-                "2faae45e9f697935",
-                "fce21711086bb35d"
+                "2faae45e9f697935"
             ]
         ]
     },
@@ -1438,7 +1435,7 @@
         "type": "rbe",
         "z": "f6f2187d.f17ca8",
         "name": "",
-        "func": "rbei",
+        "func": "rbe",
         "gap": "",
         "start": "",
         "inout": "out",
@@ -1449,7 +1446,8 @@
         "y": 680,
         "wires": [
             [
-                "f190de448e6fa47d"
+                "f190de448e6fa47d",
+                "8c8448af760adcf8"
             ]
         ]
     },
@@ -1752,7 +1750,7 @@
         "op2": "",
         "op1type": "nul",
         "op2type": "pay",
-        "duration": "10",
+        "duration": "60",
         "extend": true,
         "overrideDelay": false,
         "units": "s",
@@ -1766,29 +1764,6 @@
             [
                 "d041b84986b89802"
             ]
-        ]
-    },
-    {
-        "id": "29e021f3d3756614",
-        "type": "delay",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 600,
-        "y": 1480,
-        "wires": [
-            []
         ]
     },
     {
