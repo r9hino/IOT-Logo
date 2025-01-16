@@ -189,6 +189,11 @@
         "token": ""
     },
     {
+        "id": "1cd1c8e9cc8bc8a4",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "Julian Meyer"
+    },
+    {
         "id": "2bfa19bdbbcad994",
         "type": "s7 in",
         "z": "f6f2187d.f17ca8",
@@ -1248,7 +1253,8 @@
         "y": 1420,
         "wires": [
             [
-                "2faae45e9f697935"
+                "2faae45e9f697935",
+                "fce21711086bb35d"
             ]
         ]
     },
@@ -1309,7 +1315,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 840,
-        "y": 1460,
+        "y": 1480,
         "wires": [
             []
         ]
@@ -1325,7 +1331,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             []
         ]
@@ -1558,7 +1564,8 @@
         "name": "Send Notifications",
         "mode": "link",
         "links": [
-            "9ce4b6a8c1e9af2c"
+            "9ce4b6a8c1e9af2c",
+            "1ac91a128f3b04f9"
         ],
         "x": 695,
         "y": 1280,
@@ -1595,7 +1602,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 860,
+        "y": 820,
         "wires": []
     },
     {
@@ -1603,7 +1610,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "Recupera volumen actual PLC",
-        "func": "// Get latest flow values\nlet volume_m3 = flow.get('volume_m3');\nlet volume_100L = flow.get('volume_100L');\nlet volume_previous = flow.get('volume_previous');\n\nlet volume_PLC;\nlet volume_delta;\n\nif (volume_m3 !== undefined && volume_100L !== undefined && volume_previous !== undefined){\n    volume_PLC = volume_m3 + volume_100L/10;\n    \n    if(volume_PLC >= volume_previous){\n        volume_delta = volume_PLC - volume_previous;\n    }\n    else{\n        volume_delta = volume_PLC;\n    }\n    \n    flow.set('volume_previous', volume_PLC);\n    msg.volume_delta = volume_delta;\n    msg.volume_PLC = volume_PLC;\n\n    return msg;\n}",
+        "func": "// Get latest flow values\nlet volume_m3 = flow.get('volume_m3');\nlet volume_100L = flow.get('volume_100L');\nlet volume_previous = flow.get('volume_previous');\n\nlet volume_PLC;\nlet volume_delta;\n\nif (volume_m3 !== undefined && volume_100L !== undefined){\n    volume_PLC = volume_m3 + volume_100L/10;\n    \n    if (volume_previous !== undefined){\n        if(volume_PLC >= volume_previous){\n            volume_delta = volume_PLC - volume_previous;\n        }\n        else{\n            volume_delta = volume_PLC;\n        }\n        msg.volume_delta = volume_delta;\n    }\n    \n    flow.set('volume_previous', volume_PLC);\n    msg.volume_PLC = volume_PLC;\n\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1682,7 +1689,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "5",
+        "repeat": "20",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -1775,7 +1782,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 310,
+        "x": 350,
         "y": 920,
         "wires": [
             [
@@ -1795,7 +1802,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 570,
         "y": 920,
         "wires": [
             [
@@ -1842,7 +1849,7 @@
         "payload": "This is a test",
         "payloadType": "str",
         "x": 100,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "ab24375cb61c90bf"
@@ -1863,7 +1870,7 @@
         "name": "philippe.ilharreguy@gmail.com",
         "dname": "PI email",
         "x": 260,
-        "y": 120,
+        "y": 180,
         "wires": []
     },
     {
@@ -2082,7 +2089,8 @@
         "y": 60,
         "wires": [
             [
-                "fcb51e4af2e157b9"
+                "fcb51e4af2e157b9",
+                "9b7fdb2b5344b361"
             ]
         ]
     },
@@ -2120,7 +2128,7 @@
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
         "name": "Query Flujo L/min - Volumen m3",
-        "query": "WITH \nsensor1 AS (\n    SELECT time,\n    measurement \n    FROM sensor_log \n    WHERE sensor_id = 1 \n    ORDER BY time DESC \n    LIMIT 1\n),\nsensor2 AS (\n    SELECT measurement \n    FROM sensor_log \n    WHERE sensor_id = 2 \n    ORDER BY time DESC \n    LIMIT 1\n)\nSELECT\n\tsensor1.time as timestamp,\n\tTO_CHAR(sensor1.time, 'DD-MM-YYYY') AS date,\n    TO_CHAR(sensor1.time, 'HH24:MI:SS') AS time,\n    sensor1.measurement AS \"flujo_L_min\", \n    sensor2.measurement AS volumen_m3\nFROM sensor1, sensor2",
+        "query": "WITH oldest_values AS (\n    SELECT\n        sensor_id,\n        MIN(bucket) AS oldest_bucket\n    FROM sensor_log_hora\n    WHERE estado_dga != 'Enviado ok' AND sensor_id IN (1, 2)\n    GROUP BY sensor_id\n)\nSELECT\n    slh.*,\n    s.sensor_description \nFROM sensor_log_hora slh\nJOIN sensors s ON slh.sensor_id = s.sensor_id \nJOIN oldest_values ov ON slh.sensor_id = ov.sensor_id AND slh.bucket = ov.oldest_bucket\nWHERE slh.estado_dga != 'Enviado ok'\nORDER BY slh.sensor_id;",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
@@ -2178,8 +2186,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 730,
-        "y": 420,
+        "x": 370,
+        "y": 480,
         "wires": [
             [
                 "a06a4d89b48eebd0"
@@ -2191,18 +2199,19 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "PutSOAP",
-        "func": "const timestamp = msg.payload[0].timestamp.toISOString().slice(0, 19) + 'Z'; //localDateTimeString = localDateTimeString.timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: \"America/Santiago\", hour12: false };\nconst date = msg.payload[0].timestamp.toLocaleDateString(\"en-GB\", options).replaceAll(\"/\", \"-\");\nconst time = msg.payload[0].timestamp.toLocaleTimeString(\"en-GB\", options);\nconst volumen_m3 = msg.payload[0].volumen_m3;\nconst flujo_L_s = (msg.payload[0].flujo_L_min/60).toFixed(2);\n\nmsg.headers = {\n    'Content-Type': 'text/xml;charset=UTF-8',\n    'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n    'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload = \n`<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>OB-1401-255</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${flujo_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
+        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nlet dga_codigo = env.get('DGA_CODIGO')\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp, timestamp_no_ms: timestamp_no_ms,\n   date_local: date_local, time: time, caudal: caudal_L_s};\nreturn msg;\n*/\n\nmsg.headers = {\n   'Content-Type': 'text/xml;charset=UTF-8',\n   'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n   'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload =\n   `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>${dga_codigo}</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp_no_ms}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSuperficial>\n            <aut:fechaMedicion>${date_local}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${caudal_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSuperficial>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\nmsg.soap_request = msg.payload;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
-        "y": 420,
+        "x": 100,
+        "y": 480,
         "wires": [
             [
-                "aa1abbf650e2eec6"
+                "083e0cd7609d99d7",
+                "e642b7fafc2293e6"
             ]
         ]
     },
@@ -2220,7 +2229,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 720,
-        "y": 480,
+        "y": 540,
         "wires": []
     },
     {
@@ -2231,7 +2240,7 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 350,
+        "x": 510,
         "y": 480,
         "wires": [
             [
@@ -2244,18 +2253,129 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "ExtractResponse",
-        "func": "let newmsg = {};\n\nnewmsg = msg.payload[\"soapenv:Envelope\"][\"soapenv:Body\"][0][\"authSendDataExtraccionResponse\"][0];\nnewmsg = newmsg[\"status\"][0];\n\nreturn newmsg;",
+        "func": "let httpStatusCode = msg.statusCode;\nlet soap_data;\nlet status;\nlet new_payload = {};\nlet error_counter = context.get('error_counter') || 0;\n\nmsg.xml = msg.payload;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    soap_data = msg.payload[\"soapenv:Envelope\"][\"soapenv:Body\"][0][\"authSendDataExtraccionResponse\"][0];\n    new_payload[\"httpStatusCode\"] = httpStatusCode;\n    new_payload[\"comprobante_dga\"] = soap_data[\"numeroComprobante\"][0];\n\n    status = soap_data[\"status\"][0];\n    new_payload[\"codigo_dga\"] = status[\"Code\"][0];\n    new_payload[\"descripcion\"] = status[\"Description\"][0];\n\n    if (new_payload[\"codigo_dga\"] == 0) {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Codigo DGA distinto de cero\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 5) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n\n    new_payload[\"comprobante_dga\"] = 0;\n}\n\nmsg.payload = new_payload;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
-        "y": 480,
+        "x": 130,
+        "y": 540,
         "wires": [
             [
                 "e642b7fafc2293e6"
+            ]
+        ]
+    },
+    {
+        "id": "083e0cd7609d99d7",
+        "type": "switch",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "No data to send",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "aa1abbf650e2eec6"
+            ]
+        ]
+    },
+    {
+        "id": "c8836d2a9e6ff94a",
+        "type": "switch",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Error en enviado",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Enviado ok",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 580,
+        "wires": [
+            [],
+            [
+                "f8edef2baede9ad1"
+            ]
+        ]
+    },
+    {
+        "id": "f8edef2baede9ad1",
+        "type": "postgresql",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Update registro sensor_id 1 y 2",
+        "query": "BEGIN;\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    ROLLBACK;\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nCOMMIT;\n",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "643802f6d226e4ea",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9b7fdb2b5344b361",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "credtype": "account",
+        "account": "1cd1c8e9cc8bc8a4",
+        "text": "alert_message",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "msg",
+        "rejectssl": true,
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "643802f6d226e4ea"
             ]
         ]
     }
