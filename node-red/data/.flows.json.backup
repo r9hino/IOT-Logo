@@ -1564,8 +1564,7 @@
         "name": "Send Notifications",
         "mode": "link",
         "links": [
-            "9ce4b6a8c1e9af2c",
-            "1ac91a128f3b04f9"
+            "9ce4b6a8c1e9af2c"
         ],
         "x": 695,
         "y": 1280,
@@ -2199,7 +2198,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "PutSOAP",
-        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nlet dga_codigo = env.get('DGA_CODIGO')\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp, timestamp_no_ms: timestamp_no_ms,\n   date_local: date_local, time: time, caudal: caudal_L_s};\nreturn msg;\n*/\n\nmsg.headers = {\n   'Content-Type': 'text/xml;charset=UTF-8',\n   'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n   'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload =\n   `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>${dga_codigo}</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp_no_ms}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSuperficial>\n            <aut:fechaMedicion>${date_local}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${caudal_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSuperficial>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\nmsg.soap_request = msg.payload;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
+        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nlet dga_codigo = env.get('DGA_CODIGO')\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp, timestamp_no_ms: timestamp_no_ms,\n   date_local: date_local, time: time, caudal: caudal_L_s};\nreturn msg;\n*/\n\nmsg.headers = {\n   'Content-Type': 'text/xml;charset=UTF-8',\n   'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n   'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload =\n   `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>${dga_codigo}</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp_no_ms}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date_local}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${caudal_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\nmsg.soap_request = msg.payload;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2210,8 +2209,7 @@
         "y": 480,
         "wires": [
             [
-                "083e0cd7609d99d7",
-                "e642b7fafc2293e6"
+                "083e0cd7609d99d7"
             ]
         ]
     },
@@ -2228,7 +2226,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
+        "x": 320,
         "y": 540,
         "wires": []
     },
@@ -2253,7 +2251,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "ExtractResponse",
-        "func": "let httpStatusCode = msg.statusCode;\nlet soap_data;\nlet status;\nlet new_payload = {};\nlet error_counter = context.get('error_counter') || 0;\n\nmsg.xml = msg.payload;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    soap_data = msg.payload[\"soapenv:Envelope\"][\"soapenv:Body\"][0][\"authSendDataExtraccionResponse\"][0];\n    new_payload[\"httpStatusCode\"] = httpStatusCode;\n    new_payload[\"comprobante_dga\"] = soap_data[\"numeroComprobante\"][0];\n\n    status = soap_data[\"status\"][0];\n    new_payload[\"codigo_dga\"] = status[\"Code\"][0];\n    new_payload[\"descripcion\"] = status[\"Description\"][0];\n\n    if (new_payload[\"codigo_dga\"] == 0) {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Codigo DGA distinto de cero\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 5) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n\n    new_payload[\"comprobante_dga\"] = 0;\n}\n\nmsg.payload = new_payload;\nreturn msg;",
+        "func": "let new_payload = {};\nnew_payload[\"httpStatusCode\"] = msg.statusCode;\n\nlet soap_data;\nlet status;\n\nlet error_counter = context.get('error_counter') || 0;\n\nmsg.xml = msg.payload;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    soap_data = msg.payload[\"soapenv:Envelope\"][\"soapenv:Body\"][0][\"authSendDataExtraccionResponse\"][0];\n    \n    new_payload[\"comprobante_dga\"] = soap_data[\"numeroComprobante\"][0];\n\n    status = soap_data[\"status\"][0];\n    new_payload[\"codigo_dga\"] = status[\"Code\"][0];\n    new_payload[\"descripcion\"] = status[\"Description\"][0];\n\n    if (new_payload[\"codigo_dga\"] == 0) {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Codigo DGA distinto de cero\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 5) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n    \n    new_payload[\"comprobante_dga\"] = 0;\n    new_payload[\"codigo_dga\"] = \"\";\n    new_payload[\"descripcion\"] = error.toString();\n}\n\nmsg.payload = new_payload;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2264,7 +2262,8 @@
         "y": 540,
         "wires": [
             [
-                "e642b7fafc2293e6"
+                "e642b7fafc2293e6",
+                "c8836d2a9e6ff94a"
             ]
         ]
     },
@@ -2288,7 +2287,9 @@
         "x": 230,
         "y": 480,
         "wires": [
-            []
+            [
+                "aa1abbf650e2eec6"
+            ]
         ]
     },
     {
@@ -2296,7 +2297,7 @@
         "type": "switch",
         "z": "c19fc8a18bff1dd0",
         "name": "",
-        "property": "payload",
+        "property": "payload[\"estado_dga\"]",
         "propertyType": "msg",
         "rules": [
             {
@@ -2313,7 +2314,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 290,
+        "x": 310,
         "y": 580,
         "wires": [
             [],
@@ -2327,15 +2328,17 @@
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
         "name": "Update registro sensor_id 1 y 2",
-        "query": "BEGIN;\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    ROLLBACK;\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nCOMMIT;\n",
+        "query": "DO $$\nBEGIN\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nEND $$;",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 550,
+        "x": 510,
         "y": 600,
         "wires": [
-            []
+            [
+                "700add207deba95f"
+            ]
         ]
     },
     {
@@ -2376,5 +2379,40 @@
                 "643802f6d226e4ea"
             ]
         ]
+    },
+    {
+        "id": "700add207deba95f",
+        "type": "postgresql",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Query registros pendientes",
+        "query": "select count(*) AS registros_pendientes\nfrom sensor_log_hora\nwhere \"estado_dga\" <> 'Enviado ok';",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 500,
+        "y": 660,
+        "wires": [
+            [
+                "8abee50f35a41f33"
+            ]
+        ]
+    },
+    {
+        "id": "8abee50f35a41f33",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Registros pendientes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload[0]",
+        "statusType": "msg",
+        "x": 740,
+        "y": 660,
+        "wires": []
     }
 ]
