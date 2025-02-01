@@ -9,7 +9,7 @@
     {
         "id": "c19fc8a18bff1dd0",
         "type": "tab",
-        "label": "Notifications",
+        "label": "Data Publication",
         "disabled": false,
         "info": "",
         "env": []
@@ -2107,14 +2107,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "129",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 110,
         "y": 420,
         "wires": [
             [
@@ -2170,35 +2170,11 @@
         ]
     },
     {
-        "id": "aa1abbf650e2eec6",
-        "type": "http request",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "https://snia.mop.gob.cl/controlextraccion/datosExtraccion/SendDataExtraccionService",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 370,
-        "y": 480,
-        "wires": [
-            [
-                "a06a4d89b48eebd0"
-            ]
-        ]
-    },
-    {
         "id": "c7ccf197ba79aba1",
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "PutSOAP",
-        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nlet dga_codigo = env.get('DGA_CODIGO')\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp, timestamp_no_ms: timestamp_no_ms,\n   date_local: date_local, time: time, caudal: caudal_L_s};\nreturn msg;\n*/\n\nmsg.headers = {\n   'Content-Type': 'text/xml;charset=UTF-8',\n   'SOAPAction': 'http://www.mop.cl/controlextraccion/wsdl/datosExtraccion/authSendDataExtraccionOp',\n   'Host': 'snia.mop.gob.cl'\n};\n\nmsg.payload =\n   `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n   <soapenv:Header>\n      <aut:authSendDataExtraccionTraza>\n         <aut:codigoDeLaObra>${dga_codigo}</aut:codigoDeLaObra>\n         <aut:timeStampOrigen>${timestamp_no_ms}</aut:timeStampOrigen>\n      </aut:authSendDataExtraccionTraza>\n   </soapenv:Header>\n   <soapenv:Body>\n      <aut:authSendDataExtraccionRequest>\n         <aut:authDataUsuario>\n            <aut:idUsuario>\n               <aut:rut>16338539-2</aut:rut>\n            </aut:idUsuario>\n            <aut:password>MkMKg69nO2</aut:password>\n         </aut:authDataUsuario>\n         <aut:authDataExtraccionSubterranea>\n            <aut:fechaMedicion>${date_local}</aut:fechaMedicion>\n            <aut:horaMedicion>${time}</aut:horaMedicion>\n            <aut:totalizador>${volumen_m3}</aut:totalizador>\n            <aut:caudal>${caudal_L_s}</aut:caudal>\n            <aut:nivelFreaticoDelPozo>1.0</aut:nivelFreaticoDelPozo>\n         </aut:authDataExtraccionSubterranea>\n      </aut:authSendDataExtraccionRequest>\n   </soapenv:Body>\n</soapenv:Envelope>`;\n\nmsg.soap_request = msg.payload;\n\ndelete msg.pgsql;\n\nreturn msg;\n",
+        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nconst dga_codigo = env.get('DGA_CODIGO');\nconst dga_password = env.get('DGA_PASSWORD');\nconst dga_usuario_rut = env.get('DGA_USUARIO_RUT');\nconst dga_empresa_rut = env.get('DGA_EMPRESA_RUT');\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp, timestamp_no_ms: timestamp_no_ms,\n   date_local: date_local, time: time,\n   caudal: caudal_L_s,\n   totalizador: volumen_m3};\nreturn msg;\n*/\n\n// Set custom headers\nmsg.headers = {\n   codigoObra: dga_codigo,\n   timeStampOrigen: timestamp_no_ms\n};\n\n// Prepare JSON body\nmsg.payload = {\n   autenticacion: {\n      password: dga_password,\n      rutEmpresa: dga_empresa_rut,\n      rutUsuario: dga_usuario_rut\n   },\n   medicionSuperficialFlujometro: {\n      caudal: caudal_L_s,\n      fechaMedicion: date_local,\n      horaMedicion: time,\n      totalizador: volumen_m3\n   }\n};\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2209,7 +2185,7 @@
         "y": 480,
         "wires": [
             [
-                "083e0cd7609d99d7"
+                "e24db0a782957a33"
             ]
         ]
     },
@@ -2217,7 +2193,7 @@
         "id": "e642b7fafc2293e6",
         "type": "debug",
         "z": "c19fc8a18bff1dd0",
-        "name": "debug 8",
+        "name": "Respuesta server DGA",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -2226,71 +2202,9 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 320,
+        "x": 370,
         "y": 540,
         "wires": []
-    },
-    {
-        "id": "a06a4d89b48eebd0",
-        "type": "xml",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "property": "payload",
-        "attr": "",
-        "chr": "",
-        "x": 510,
-        "y": 480,
-        "wires": [
-            [
-                "aa3a6b3239d373ef"
-            ]
-        ]
-    },
-    {
-        "id": "aa3a6b3239d373ef",
-        "type": "function",
-        "z": "c19fc8a18bff1dd0",
-        "name": "ExtractResponse",
-        "func": "let new_payload = {};\nnew_payload[\"httpStatusCode\"] = msg.statusCode;\n\nlet soap_data;\nlet status;\n\nlet error_counter = context.get('error_counter') || 0;\n\nmsg.xml = msg.payload;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    soap_data = msg.payload[\"soapenv:Envelope\"][\"soapenv:Body\"][0][\"authSendDataExtraccionResponse\"][0];\n    \n    new_payload[\"comprobante_dga\"] = soap_data[\"numeroComprobante\"][0];\n\n    status = soap_data[\"status\"][0];\n    new_payload[\"codigo_dga\"] = status[\"Code\"][0];\n    new_payload[\"descripcion\"] = status[\"Description\"][0];\n\n    if (new_payload[\"codigo_dga\"] == 0) {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Codigo DGA distinto de cero\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 5) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n    \n    new_payload[\"comprobante_dga\"] = 0;\n    new_payload[\"codigo_dga\"] = \"\";\n    new_payload[\"descripcion\"] = error.toString();\n}\n\nmsg.payload = new_payload;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 130,
-        "y": 540,
-        "wires": [
-            [
-                "e642b7fafc2293e6",
-                "c8836d2a9e6ff94a"
-            ]
-        ]
-    },
-    {
-        "id": "083e0cd7609d99d7",
-        "type": "switch",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "No data to send",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 230,
-        "y": 480,
-        "wires": [
-            [
-                "aa1abbf650e2eec6"
-            ]
-        ]
     },
     {
         "id": "c8836d2a9e6ff94a",
@@ -2314,8 +2228,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 310,
-        "y": 580,
+        "x": 90,
+        "y": 600,
         "wires": [
             [],
             [
@@ -2328,12 +2242,12 @@
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
         "name": "Update registro sensor_id 1 y 2",
-        "query": "DO $$\nBEGIN\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.comprobante_dga }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nEND $$;",
+        "query": "DO $$\nBEGIN\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nEND $$;",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 510,
+        "x": 390,
         "y": 600,
         "wires": [
             [
@@ -2390,7 +2304,7 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 500,
+        "x": 380,
         "y": 660,
         "wires": [
             [
@@ -2404,15 +2318,101 @@
         "z": "c19fc8a18bff1dd0",
         "name": "Registros pendientes",
         "active": true,
-        "tosidebar": true,
+        "tosidebar": false,
         "console": false,
         "tostatus": true,
         "complete": "payload",
         "targetType": "msg",
         "statusVal": "payload[0]",
         "statusType": "msg",
-        "x": 740,
+        "x": 620,
         "y": 660,
         "wires": []
+    },
+    {
+        "id": "e24db0a782957a33",
+        "type": "switch",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "No data to send",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "68772251187a3711"
+            ]
+        ]
+    },
+    {
+        "id": "68772251187a3711",
+        "type": "http request",
+        "z": "c19fc8a18bff1dd0",
+        "name": "POST to API",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://apimee.mop.gob.cl/api/v1/mediciones/superficiales/flujometro",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 480,
+        "wires": [
+            [
+                "dce6c0439a955937"
+            ]
+        ]
+    },
+    {
+        "id": "dce6c0439a955937",
+        "type": "json",
+        "z": "c19fc8a18bff1dd0",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 480,
+        "wires": [
+            [
+                "370c6d33df3b5a0b"
+            ]
+        ]
+    },
+    {
+        "id": "370c6d33df3b5a0b",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "ExtractResponse",
+        "func": "let new_payload = msg.payload;\nlet error_counter = context.get('error_counter') || 0;\n\nnew_payload[\"httpStatusCode\"] = msg.statusCode;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    if (new_payload[\"status\"] == \"00\" || \n    new_payload[\"message\"] == \"Ya existe un registro en esa fecha, hora para la obra\") {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Status DGA distinto de 00\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 3) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n    new_payload[\"data\"] = {numeroComprobante: \"0\"};\n    new_payload[\"error\"] = error.toString();\n}\n\ndelete msg.headers;\ndelete msg.statusCode;\ndelete msg.responseUrl;\ndelete msg.redirectList;\ndelete msg.retry;\n\nmsg.payload = new_payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "e642b7fafc2293e6",
+                "c8836d2a9e6ff94a"
+            ]
+        ]
     }
 ]

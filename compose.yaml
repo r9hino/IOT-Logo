@@ -67,6 +67,9 @@ services:
       - PLC_PRIVATE_IP=${PLC_PRIVATE_IP}
       - PLC_PORT=${PLC_PORT}
       - DGA_CODIGO=${DGA_CODIGO}
+      - DGA_PASSWORD=${DGA_PASSWORD}
+      - DGA_USUARIO_RUT=${DGA_USUARIO_RUT}
+      - DGA_EMPRESA_RUT=${DGA_EMPRESA_RUT}
     depends_on:
       timescale:
         condition: service_started
