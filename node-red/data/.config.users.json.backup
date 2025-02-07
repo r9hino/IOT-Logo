@@ -31,7 +31,12 @@
                 "view-show-welcome-tours": true
             },
             "tours": {
-                "welcome": "3.1.9"
+                "welcome": "4.0.8"
+            },
+            "dialog": {
+                "export": {
+                    "pretty": true
+                }
             }
         }
     }
