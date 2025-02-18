@@ -75,11 +75,11 @@
             },
             {
                 "addr": "DB1,X0.2",
-                "name": "R-I3 Modo automatico"
+                "name": "R-I3 Modo Auto-Man"
             },
             {
                 "addr": "DB1,X0.3",
-                "name": "R-I4 Modo manual"
+                "name": "R-I4 Paleta flujo"
             },
             {
                 "addr": "DB1,X0.4",
@@ -452,7 +452,7 @@
         "diff": true,
         "name": "R-Volumen m3",
         "x": 160,
-        "y": 760,
+        "y": 880,
         "wires": [
             [
                 "419508e0091305d8"
@@ -469,10 +469,10 @@
         "diff": true,
         "name": "R-Flujo L/min",
         "x": 170,
-        "y": 700,
+        "y": 820,
         "wires": [
             [
-                "5a4baefcfe250236"
+                "29b4b134336d905a"
             ]
         ]
     },
@@ -487,7 +487,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 700,
+        "y": 820,
         "wires": [
             []
         ]
@@ -502,7 +502,7 @@
         "diff": true,
         "name": "R-Q1 Contactor bomba 1",
         "x": 130,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             [
                 "456ef010663bd89e"
@@ -519,7 +519,7 @@
         "diff": true,
         "name": "R-Q2 Contactor bomba 2",
         "x": 130,
-        "y": 1060,
+        "y": 1180,
         "wires": [
             [
                 "3fa3a438efece258"
@@ -609,7 +609,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 820,
-        "y": 920,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -625,7 +625,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 850,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -641,7 +641,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 850,
-        "y": 1060,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -657,7 +657,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 850,
-        "y": 620,
+        "y": 740,
         "wires": [
             []
         ]
@@ -672,7 +672,7 @@
         "diff": true,
         "name": "R-I6 Presostato",
         "x": 160,
-        "y": 620,
+        "y": 740,
         "wires": [
             [
                 "83cacdf41bfc6702"
@@ -689,7 +689,7 @@
         "diff": true,
         "name": "R-Q3 Descebo bomba 1",
         "x": 130,
-        "y": 1120,
+        "y": 1240,
         "wires": [
             [
                 "98a78b9c0a47453f"
@@ -706,7 +706,7 @@
         "diff": true,
         "name": "R-Q4 Descebo bomba 2",
         "x": 130,
-        "y": 1180,
+        "y": 1300,
         "wires": [
             [
                 "dad7b6edf8739758"
@@ -724,7 +724,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 1120,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -760,7 +760,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 620,
+        "y": 740,
         "wires": [
             [
                 "f71277c148fb3424"
@@ -777,7 +777,7 @@
         "diff": true,
         "name": "R-I7 Falla termica bomba 1",
         "x": 130,
-        "y": 1240,
+        "y": 1360,
         "wires": [
             [
                 "99d331f8bb834be8"
@@ -794,7 +794,7 @@
         "diff": true,
         "name": "R-I8 Falla termica bomba 2",
         "x": 130,
-        "y": 1300,
+        "y": 1420,
         "wires": [
             [
                 "8a60685fce5357a8"
@@ -964,7 +964,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1300,
+        "y": 1420,
         "wires": [
             [
                 "91334c2980e70d2b"
@@ -991,7 +991,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1240,
+        "y": 1360,
         "wires": [
             [
                 "aa90b1dd3cf2d1e3"
@@ -1018,7 +1018,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1180,
+        "y": 1300,
         "wires": [
             [
                 "82032042c88fc8d5"
@@ -1045,7 +1045,7 @@
         "repair": false,
         "outputs": 2,
         "x": 430,
-        "y": 1120,
+        "y": 1240,
         "wires": [
             [
                 "d5a70810fe6f354d"
@@ -1066,7 +1066,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1120,
+        "y": 1240,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1087,7 +1087,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1180,
+        "y": 1300,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1108,7 +1108,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1240,
+        "y": 1360,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1129,7 +1129,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 1300,
+        "y": 1420,
         "wires": [
             [
                 "d2431ab7a01f32ed",
@@ -1146,7 +1146,7 @@
         "timeout": "3",
         "requests": "3",
         "x": 240,
-        "y": 1440,
+        "y": 1560,
         "wires": [
             [
                 "9b391cacec3675a5"
@@ -1175,7 +1175,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 90,
-        "y": 1440,
+        "y": 1560,
         "wires": [
             [
                 "0232095f769d9c51"
@@ -1195,7 +1195,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1440,
+        "y": 1560,
         "wires": [
             []
         ]
@@ -1213,7 +1213,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 590,
-        "y": 1460,
+        "y": 1580,
         "wires": [
             [
                 "8cf4219a27eea7b5",
@@ -1239,7 +1239,7 @@
         "repair": false,
         "outputs": 1,
         "x": 590,
-        "y": 1420,
+        "y": 1540,
         "wires": [
             [
                 "2faae45e9f697935",
@@ -1256,7 +1256,7 @@
             "e972a6f1f5d6c9c2"
         ],
         "x": 80,
-        "y": 1480,
+        "y": 1600,
         "wires": [
             [
                 "5fb634a2da765abf"
@@ -1276,7 +1276,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 1480,
+        "y": 1600,
         "wires": [
             [
                 "ff0526a7882c54e1"
@@ -1290,7 +1290,7 @@
         "name": "Check communication between gateway and PLC. Send alert only after x seconds of interruption.",
         "info": "",
         "x": 330,
-        "y": 1380,
+        "y": 1500,
         "wires": []
     },
     {
@@ -1304,7 +1304,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 840,
-        "y": 1480,
+        "y": 1600,
         "wires": [
             []
         ]
@@ -1320,7 +1320,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 810,
-        "y": 1420,
+        "y": 1540,
         "wires": [
             []
         ]
@@ -1338,7 +1338,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             [
                 "a5e8ca678847893b"
@@ -1358,7 +1358,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1060,
+        "y": 1180,
         "wires": [
             [
                 "b0cebffb90e675c8"
@@ -1418,51 +1418,10 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 620,
+        "y": 740,
         "wires": [
             [
                 "7b23eb345a75abd6"
-            ]
-        ]
-    },
-    {
-        "id": "5a4baefcfe250236",
-        "type": "rbe",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 310,
-        "y": 700,
-        "wires": [
-            [
-                "f190de448e6fa47d"
-            ]
-        ]
-    },
-    {
-        "id": "6c9da29d426b490e",
-        "type": "rbe",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "func": "rbei",
-        "gap": "0",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "volume_PLC",
-        "topi": "topic",
-        "x": 670,
-        "y": 860,
-        "wires": [
-            [
-                "8c8448af760adcf8",
-                "19b3eb7277428be3"
             ]
         ]
     },
@@ -1479,7 +1438,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1120,
+        "y": 1240,
         "wires": [
             [
                 "33c3983fc071c9ec"
@@ -1499,7 +1458,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1180,
+        "y": 1300,
         "wires": [
             [
                 "718f15291eb3cc34"
@@ -1519,7 +1478,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1240,
+        "y": 1360,
         "wires": [
             [
                 "d9b290fe2697d0aa"
@@ -1539,7 +1498,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 310,
-        "y": 1300,
+        "y": 1420,
         "wires": [
             [
                 "efe91050b8b1939b"
@@ -1556,7 +1515,7 @@
             "9ce4b6a8c1e9af2c"
         ],
         "x": 695,
-        "y": 1280,
+        "y": 1400,
         "wires": []
     },
     {
@@ -1569,7 +1528,7 @@
         "diff": true,
         "name": "R-Volumen 100L",
         "x": 160,
-        "y": 820,
+        "y": 940,
         "wires": [
             [
                 "34f39b5a54ab12dc"
@@ -1581,7 +1540,7 @@
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "debug 10",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1590,7 +1549,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 820,
+        "y": 940,
         "wires": []
     },
     {
@@ -1606,10 +1565,11 @@
         "finalize": "",
         "libs": [],
         "x": 450,
-        "y": 860,
+        "y": 980,
         "wires": [
             [
-                "6c9da29d426b490e"
+                "8c8448af760adcf8",
+                "19b3eb7277428be3"
             ]
         ]
     },
@@ -1633,7 +1593,7 @@
         "to": "",
         "reg": false,
         "x": 350,
-        "y": 760,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1658,7 +1618,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 820,
+        "y": 940,
         "wires": [
             []
         ]
@@ -1677,7 +1637,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "20",
+        "repeat": "300",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -1685,7 +1645,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 210,
-        "y": 860,
+        "y": 980,
         "wires": [
             [
                 "55b8c0f77196eac6"
@@ -1705,7 +1665,7 @@
         "finalize": "",
         "libs": [],
         "x": 920,
-        "y": 760,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1728,7 +1688,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 750,
-        "y": 760,
+        "y": 880,
         "wires": [
             [
                 "f16690b48d60a7e6"
@@ -1753,7 +1713,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 450,
-        "y": 1480,
+        "y": 1600,
         "wires": [
             [
                 "d041b84986b89802"
@@ -1771,7 +1731,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 350,
-        "y": 920,
+        "y": 1040,
         "wires": [
             [
                 "2bfad1824f127e03"
@@ -1791,10 +1751,223 @@
         "finalize": "",
         "libs": [],
         "x": 570,
-        "y": 920,
+        "y": 1040,
         "wires": [
             [
                 "ea7cce0b31c42e8e"
+            ]
+        ]
+    },
+    {
+        "id": "cac5c7e3f20e7417",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I3 Modo Auto-Man",
+        "diff": true,
+        "name": "R-I3 Modo Auto-Man",
+        "x": 150,
+        "y": 620,
+        "wires": [
+            [
+                "0845d8df26af5aaa"
+            ]
+        ]
+    },
+    {
+        "id": "f1e387e9e0455d76",
+        "type": "s7 in",
+        "z": "f6f2187d.f17ca8",
+        "endpoint": "9f820a4ae6200aba",
+        "mode": "single",
+        "variable": "R-I4 Paleta flujo",
+        "diff": true,
+        "name": "R-I4 Paleta flujo",
+        "x": 160,
+        "y": 680,
+        "wires": [
+            [
+                "e237d2cc55e718ac"
+            ]
+        ]
+    },
+    {
+        "id": "066a09212f024e11",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "True -> Auto ------ False -> Man",
+        "info": "",
+        "x": 850,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3ee5ee7dfecf045f",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar alerta - Tabla alert_log",
+        "query": "INSERT INTO alert_log (time, sensor_id, actuator_id, alert_message)\n    VALUES (NOW(), NULL, {{{msg.actuator_id}}}, '{{{msg.alert_message}}}');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 810,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "73f15443f4f6b44a",
+        "type": "link out",
+        "z": "f6f2187d.f17ca8",
+        "name": "Send Notifications",
+        "mode": "link",
+        "links": [
+            "9ce4b6a8c1e9af2c"
+        ],
+        "x": 695,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "763a435b9ce7f338",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 5",
+        "func": "msg.sensor_id = null;\nmsg.actuator_id = 3;\n\nif(msg.payload == true) msg.alert_message = 'Modo automatico activo';\nelse if (msg.payload == false) msg.alert_message = 'Modo manual activo';\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 620,
+        "wires": [
+            [
+                "3ee5ee7dfecf045f",
+                "73f15443f4f6b44a"
+            ]
+        ]
+    },
+    {
+        "id": "0845d8df26af5aaa",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "763a435b9ce7f338"
+            ]
+        ]
+    },
+    {
+        "id": "e237d2cc55e718ac",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "f0d1f6dffe573cb5"
+            ]
+        ]
+    },
+    {
+        "id": "f0d1f6dffe573cb5",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 680,
+        "wires": [
+            [
+                "dbb4694033afa943"
+            ]
+        ]
+    },
+    {
+        "id": "dbb4694033afa943",
+        "type": "postgresql",
+        "z": "f6f2187d.f17ca8",
+        "name": "Insertar estado paleta - Tabla sensor_log",
+        "query": "INSERT INTO sensor_log (time, sensor_id, measurement, status)\n    VALUES (NOW(), 4, {{{ msg.payload }}}, 'activo');",
+        "postgreSQLConfig": "b23d8359c5c9ebfb",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 840,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29b4b134336d905a",
+        "type": "trigger",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 350,
+        "y": 820,
+        "wires": [
+            [
+                "f190de448e6fa47d"
             ]
         ]
     },
@@ -1889,7 +2062,8 @@
         "z": "c19fc8a18bff1dd0",
         "name": "Receive Notifications",
         "links": [
-            "fce21711086bb35d"
+            "fce21711086bb35d",
+            "73f15443f4f6b44a"
         ],
         "x": 175,
         "y": 60,
@@ -1934,7 +2108,7 @@
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
         "name": "Query Flujo L/min - Volumen m3",
-        "query": "WITH oldest_values AS (\n    SELECT\n        sensor_id,\n        MIN(bucket) AS oldest_bucket\n    FROM sensor_log_hora\n    WHERE estado_dga != 'Enviado ok' AND sensor_id IN (1, 2)\n    GROUP BY sensor_id\n)\nSELECT\n    slh.*,\n    s.sensor_description \nFROM sensor_log_hora slh\nJOIN sensors s ON slh.sensor_id = s.sensor_id \nJOIN oldest_values ov ON slh.sensor_id = ov.sensor_id AND slh.bucket = ov.oldest_bucket\nWHERE slh.estado_dga != 'Enviado ok'\nORDER BY slh.sensor_id;",
+        "query": "WITH a AS (\n\tSELECT\n\t    MIN(bucket) AS oldest_bucket\n\tFROM sensor_log_hora\n\tWHERE estado_dga != 'Enviado ok'\n\tAND sensor_id IN (1, 2)\n)\nSELECT\n    b.*,\n    s.sensor_description \nFROM sensor_log_hora b\nJOIN a a ON b.bucket = a.oldest_bucket\nJOIN sensors s ON b.sensor_id = s.sensor_id \nWHERE b.estado_dga != 'Enviado ok'\nAND b.sensor_id IN (1, 2) \nORDER BY b.sensor_id;\n",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,
@@ -1952,7 +2126,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "Create JSON",
-        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nconst dga_codigo = env.get('DGA_CODIGO');\nconst dga_password = env.get('DGA_PASSWORD');\nconst dga_usuario_rut = env.get('DGA_USUARIO_RUT');\nconst dga_empresa_rut = env.get('DGA_EMPRESA_RUT');\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\nconst timestamp_local_no_ms = timestamp_local.toISOString().split('.')[0] + 'Z';\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nconst caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\nconst volumen_m3 = (msg.payload[1].avg_measurement).toFixed(0);\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp,\n   timestamp_no_ms: timestamp_no_ms,\n   timestamp_local: timestamp_local,\n   timestamp_local_no_ms: timestamp_local_no_ms,\n   date_local: date_local, time: time,\n   caudal: caudal_L_s,\n   totalizador: volumen_m3};\nreturn msg;\n*/\n\n// Set custom headers\nmsg.headers = {\n   codigoObra: dga_codigo,\n   timeStampOrigen: timestamp_local_no_ms\n};\n\n// Prepare JSON body\nmsg.payload = {\n   autenticacion: {\n      password: dga_password,\n      rutEmpresa: dga_empresa_rut,\n      rutUsuario: dga_usuario_rut\n   },\n   medicionSuperficialFlujometro: {\n      caudal: caudal_L_s,\n      fechaMedicion: date_local,\n      horaMedicion: time,\n      totalizador: volumen_m3\n   }\n};\n\ndelete msg.pgsql;\n\nreturn msg;",
+        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nconst dga_codigo = env.get('DGA_CODIGO');\nconst dga_password = env.get('DGA_PASSWORD');\nconst dga_usuario_rut = env.get('DGA_USUARIO_RUT');\nconst dga_empresa_rut = env.get('DGA_EMPRESA_RUT');\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\nconst timestamp_local_no_ms = timestamp_local.toISOString().split('.')[0] + 'Z';\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nlet caudal_L_s;\nlet volumen_m3;\n\nif(msg.payload[0] !== undefined){\n   if(msg.payload[0].sensor_id == 1){\n      caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[0].sensor_id == 2){\n      volumen_m3 = msg.payload[0].avg_measurement.toFixed(0);\n   }\n}\n\nif(msg.payload[1] !== undefined){\n   if(msg.payload[1].sensor_id == 1){\n      caudal_L_s = (msg.payload[1].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[1].sensor_id == 2){\n      volumen_m3 = msg.payload[1].avg_measurement.toFixed(0);\n   }\n}\nelse{\n   if(msg.payload[0].sensor_id == 1) volumen_m3 = \"0\";\n   if(msg.payload[0].sensor_id == 2) caudal_L_s = \"0.00\";\n}\n\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp,\n   timestamp_no_ms: timestamp_no_ms,\n   timestamp_local: timestamp_local,\n   timestamp_local_no_ms: timestamp_local_no_ms,\n   date_local: date_local, time: time,\n   caudal: caudal_L_s,\n   totalizador: volumen_m3};\nreturn msg;\n*/\n\n// Set custom headers\nmsg.headers = {\n   codigoObra: dga_codigo,\n   timeStampOrigen: timestamp_local_no_ms\n};\n\n// Prepare JSON body\nmsg.payload = {\n   autenticacion: {\n      password: dga_password,\n      rutEmpresa: dga_empresa_rut,\n      rutUsuario: dga_usuario_rut\n   },\n   medicionSuperficialFlujometro: {\n      caudal: caudal_L_s,\n      fechaMedicion: date_local,\n      horaMedicion: time,\n      totalizador: volumen_m3\n   }\n};\n\ndelete msg.pgsql;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1963,8 +2137,7 @@
         "y": 360,
         "wires": [
             [
-                "e24db0a782957a33",
-                "e642b7fafc2293e6"
+                "e24db0a782957a33"
             ]
         ]
     },
@@ -2021,7 +2194,7 @@
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
         "name": "Update registro sensor_id 1 y 2",
-        "query": "DO $$\nBEGIN\n\nUPDATE sensor_log_hora\nSET estado_dga = '{{{ msg.payload.estado_dga }}}',\n    comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n    fecha_actualizacion = NOW()\nWHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\nAND sensor_id = 1;\n\n-- Check if the first update succeeded\nIF FOUND THEN\n    UPDATE sensor_log_hora\n    SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n        comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n        fecha_actualizacion = NOW()\n    WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n    AND sensor_id = 2;\nELSE\n    RAISE NOTICE 'First update failed, transaction rolled back';\nEND IF;\n\nEND $$;",
+        "query": "DO $$\nBEGIN\n    -- First update\n    BEGIN\n        UPDATE sensor_log_hora\n        SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n            comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n            fecha_actualizacion = NOW()\n        WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n        AND sensor_id = 1;\n    EXCEPTION WHEN OTHERS THEN\n        RAISE NOTICE 'Update for sensor_id 1 failed. Continuing...';\n    END;\n\n    -- Second update\n    BEGIN\n        UPDATE sensor_log_hora\n        SET estado_dga = '{{{ msg.payload.estado_dga }}}',\n            comprobante_dga = '{{{ msg.payload.data.numeroComprobante }}}',\n            fecha_actualizacion = NOW()\n        WHERE bucket = '{{{ msg.id_composite.timestamp_no_ms }}}'\n        AND sensor_id = 2;\n    EXCEPTION WHEN OTHERS THEN\n        RAISE NOTICE 'Update for sensor_id 2 failed. Continuing...';\n    END;\nEND $$;\n",
         "postgreSQLConfig": "b23d8359c5c9ebfb",
         "split": false,
         "rowsPerMsg": 1,

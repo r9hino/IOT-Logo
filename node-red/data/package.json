@@ -9,6 +9,6 @@
         "node-red-contrib-s7": "~3.1.0",
         "node-red-contrib-soap-plus": "~1.2.0",
         "node-red-contrib-whatsapp-cmb": "~1.0.3",
-        "node-red-node-email": "~2.1.0"
+        "node-red-node-email": "~3.0.3"
     }
 }
