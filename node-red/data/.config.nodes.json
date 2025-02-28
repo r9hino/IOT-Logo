@@ -429,9 +429,9 @@
     },
     "node-red-configurable-ping": {
         "name": "node-red-configurable-ping",
-        "version": "1.0.2",
-        "local": false,
-        "user": false,
+        "version": "1.0.1",
+        "local": true,
+        "user": true,
         "nodes": {
             "file-function": {
                 "name": "file-function",
@@ -439,18 +439,18 @@
                     "conf ping"
                 ],
                 "enabled": true,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-configurable-ping",
-                "file": "/usr/src/node-red/node_modules/node-red-configurable-ping/advanced-ping/advanced-ping.js"
+                "file": "/data/node_modules/node-red-configurable-ping/advanced-ping/advanced-ping.js"
             }
         }
     },
     "node-red-contrib-s7": {
         "name": "node-red-contrib-s7",
         "version": "3.1.0",
-        "local": false,
-        "user": false,
+        "local": true,
+        "user": true,
         "nodes": {
             "s7": {
                 "name": "s7",
@@ -461,17 +461,17 @@
                     "s7 control"
                 ],
                 "enabled": true,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-contrib-s7",
-                "file": "/usr/src/node-red/node_modules/node-red-contrib-s7/red/s7.js"
+                "file": "/data/node_modules/node-red-contrib-s7/red/s7.js"
             }
         }
     },
     "node-red-node-email": {
         "name": "node-red-node-email",
-        "version": "3.0.2",
-        "local": false,
+        "version": "3.0.3",
+        "local": true,
         "user": true,
         "nodes": {
             "email": {
@@ -482,18 +482,18 @@
                     "e-mail mta"
                 ],
                 "enabled": true,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-node-email",
-                "file": "/usr/src/node-red/node_modules/node-red-node-email/61-email.js"
+                "file": "/data/node_modules/node-red-node-email/61-email.js"
             }
         }
     },
     "node-red-contrib-whatsapp-cmb": {
         "name": "node-red-contrib-whatsapp-cmb",
         "version": "1.0.3",
-        "local": false,
-        "user": false,
+        "local": true,
+        "user": true,
         "nodes": {
             "whatsapp": {
                 "name": "whatsapp",
@@ -502,18 +502,18 @@
                     "node-red-contrib-whatsapp-cmb-send-message"
                 ],
                 "enabled": true,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-contrib-whatsapp-cmb",
-                "file": "/usr/src/node-red/node_modules/node-red-contrib-whatsapp-cmb/nodes/whatsapp.js"
+                "file": "/data/node_modules/node-red-contrib-whatsapp-cmb/nodes/whatsapp.js"
             }
         }
     },
     "node-red-contrib-postgresql": {
         "name": "node-red-contrib-postgresql",
-        "version": "0.14.2",
-        "local": false,
-        "user": false,
+        "version": "0.14.0",
+        "local": true,
+        "user": true,
         "nodes": {
             "postgresql": {
                 "name": "postgresql",
@@ -522,18 +522,18 @@
                     "postgresql"
                 ],
                 "enabled": true,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-contrib-postgresql",
-                "file": "/usr/src/node-red/node_modules/node-red-contrib-postgresql/postgresql.js"
+                "file": "/data/node_modules/node-red-contrib-postgresql/postgresql.js"
             }
         }
     },
     "node-red-contrib-soap-plus": {
         "name": "node-red-contrib-soap-plus",
         "version": "1.2.0",
-        "local": false,
-        "user": false,
+        "local": true,
+        "user": true,
         "nodes": {
             "soap": {
                 "name": "soap",
@@ -541,10 +541,10 @@
                     "soap request plus"
                 ],
                 "enabled": false,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-contrib-soap-plus",
-                "file": "/usr/src/node-red/node_modules/node-red-contrib-soap-plus/soap-node-plus.js"
+                "file": "/data/node_modules/node-red-contrib-soap-plus/soap-node-plus.js"
             },
             "soap-config-plus": {
                 "name": "soap-config-plus",
@@ -552,10 +552,10 @@
                     "soap-config-plus"
                 ],
                 "enabled": false,
-                "local": false,
+                "local": true,
                 "user": false,
                 "module": "node-red-contrib-soap-plus",
-                "file": "/usr/src/node-red/node_modules/node-red-contrib-soap-plus/soap-config-plus.js"
+                "file": "/data/node_modules/node-red-contrib-soap-plus/soap-config-plus.js"
             }
         }
     }

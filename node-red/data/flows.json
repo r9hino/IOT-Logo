@@ -1548,8 +1548,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
-        "y": 940,
+        "x": 740,
+        "y": 980,
         "wires": []
     },
     {
@@ -1665,7 +1665,7 @@
         "finalize": "",
         "libs": [],
         "x": 920,
-        "y": 880,
+        "y": 920,
         "wires": [
             []
         ]
@@ -1688,7 +1688,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 750,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "f16690b48d60a7e6"
@@ -1798,7 +1798,7 @@
         "z": "f6f2187d.f17ca8",
         "name": "True -> Auto ------ False -> Man",
         "info": "",
-        "x": 850,
+        "x": 810,
         "y": 580,
         "wires": []
     },
@@ -1827,7 +1827,7 @@
         "links": [
             "9ce4b6a8c1e9af2c"
         ],
-        "x": 695,
+        "x": 645,
         "y": 580,
         "wires": []
     },
@@ -1967,7 +1967,61 @@
         "y": 820,
         "wires": [
             [
-                "f190de448e6fa47d"
+                "f190de448e6fa47d",
+                "ed111ca1ee2e5663"
+            ]
+        ]
+    },
+    {
+        "id": "ed111ca1ee2e5663",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 6",
+        "func": "msg.sensor_id = 1;\nmsg.actuator_id = null;\n\nif(msg.payload > 10 && msg.payload < 80) msg.alert_message = 'Caudal bomba menor a 80L/min';\nelse if (msg.payload > 110) msg.alert_message = 'Caudal bomba ok, mayor a 110L/min';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 860,
+        "wires": [
+            [
+                "3bd685d903b9750c"
+            ]
+        ]
+    },
+    {
+        "id": "60858e1e9e71368f",
+        "type": "link out",
+        "z": "f6f2187d.f17ca8",
+        "name": "Send Notifications",
+        "mode": "link",
+        "links": [
+            "9ce4b6a8c1e9af2c"
+        ],
+        "x": 915,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "3bd685d903b9750c",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "alert_message",
+        "topi": "topic",
+        "x": 810,
+        "y": 860,
+        "wires": [
+            [
+                "60858e1e9e71368f"
             ]
         ]
     },
@@ -2063,7 +2117,8 @@
         "name": "Receive Notifications",
         "links": [
             "fce21711086bb35d",
-            "73f15443f4f6b44a"
+            "73f15443f4f6b44a",
+            "60858e1e9e71368f"
         ],
         "x": 175,
         "y": 60,
@@ -2126,7 +2181,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "Create JSON",
-        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nconst dga_codigo = env.get('DGA_CODIGO');\nconst dga_password = env.get('DGA_PASSWORD');\nconst dga_usuario_rut = env.get('DGA_USUARIO_RUT');\nconst dga_empresa_rut = env.get('DGA_EMPRESA_RUT');\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\nconst timestamp_local_no_ms = timestamp_local.toISOString().split('.')[0] + 'Z';\n\nconst date_local = timestamp_local.toLocaleDateString('en-GB', {\n   day: '2-digit',\n   month: '2-digit',\n   year: 'numeric'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nlet caudal_L_s;\nlet volumen_m3;\n\nif(msg.payload[0] !== undefined){\n   if(msg.payload[0].sensor_id == 1){\n      caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[0].sensor_id == 2){\n      volumen_m3 = msg.payload[0].avg_measurement.toFixed(0);\n   }\n}\n\nif(msg.payload[1] !== undefined){\n   if(msg.payload[1].sensor_id == 1){\n      caudal_L_s = (msg.payload[1].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[1].sensor_id == 2){\n      volumen_m3 = msg.payload[1].avg_measurement.toFixed(0);\n   }\n}\nelse{\n   if(msg.payload[0].sensor_id == 1) volumen_m3 = \"0\";\n   if(msg.payload[0].sensor_id == 2) caudal_L_s = \"0.00\";\n}\n\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp,\n   timestamp_no_ms: timestamp_no_ms,\n   timestamp_local: timestamp_local,\n   timestamp_local_no_ms: timestamp_local_no_ms,\n   date_local: date_local, time: time,\n   caudal: caudal_L_s,\n   totalizador: volumen_m3};\nreturn msg;\n*/\n\n// Set custom headers\nmsg.headers = {\n   codigoObra: dga_codigo,\n   timeStampOrigen: timestamp_local_no_ms\n};\n\n// Prepare JSON body\nmsg.payload = {\n   autenticacion: {\n      password: dga_password,\n      rutEmpresa: dga_empresa_rut,\n      rutUsuario: dga_usuario_rut\n   },\n   medicionSuperficialFlujometro: {\n      caudal: caudal_L_s,\n      fechaMedicion: date_local,\n      horaMedicion: time,\n      totalizador: volumen_m3\n   }\n};\n\ndelete msg.pgsql;\n\nreturn msg;",
+        "func": "// Se revisa que hayan datos no enviados o con error de envio en Timescale.\nif (msg.payload[0] === undefined) {\n   msg.payload = 'No data to send';\n   return msg;\n}\n\n// Obtener codigo de DGA\nconst dga_codigo = env.get('DGA_CODIGO');\nconst dga_password = env.get('DGA_PASSWORD');\nconst dga_usuario_rut = env.get('DGA_USUARIO_RUT');\nconst dga_empresa_rut = env.get('DGA_EMPRESA_RUT');\n\n// Se generan formatos de fechas. Servidor esta con timezone.\nconst timestamp = new Date(msg.payload[0].bucket);\nconst timestamp_no_ms = timestamp.toISOString().split('.')[0] + 'Z';\nconst options = { timeZone: 'America/Santiago' };\nconst timestamp_local = new Date(timestamp.toLocaleString('en-US', options));\nconst timestamp_local_no_ms = timestamp_local.toISOString().split('.')[0] + 'Z';\n\nconst date_local = timestamp_local.toLocaleDateString('sv-SE', {\n   year: 'numeric',\n   month: '2-digit',\n   day: '2-digit'\n}).split('/').join('-');\n\nconst time = timestamp_local.toISOString().split('T')[1].split('.')[0];\n\nlet caudal_L_s;\nlet volumen_m3;\n\nif(msg.payload[0] !== undefined){\n   if(msg.payload[0].sensor_id == 1){\n      caudal_L_s = (msg.payload[0].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[0].sensor_id == 2){\n      volumen_m3 = msg.payload[0].avg_measurement.toFixed(0);\n   }\n}\n\nif(msg.payload[1] !== undefined){\n   if(msg.payload[1].sensor_id == 1){\n      caudal_L_s = (msg.payload[1].avg_measurement / 60).toFixed(2);\n   }\n   else if(msg.payload[1].sensor_id == 2){\n      volumen_m3 = msg.payload[1].avg_measurement.toFixed(0);\n   }\n}\nelse{\n   if(msg.payload[0].sensor_id == 1) volumen_m3 = \"0\";\n   if(msg.payload[0].sensor_id == 2) caudal_L_s = \"0.00\";\n}\n\n\n// Guardar id de query para actualizar despues.\nmsg.id_composite = {\n   timestamp_no_ms: timestamp_no_ms\n};\n\n/*\nmsg.payload = {bucket: msg.payload[0].bucket,\n   timestamp: timestamp,\n   timestamp_no_ms: timestamp_no_ms,\n   timestamp_local: timestamp_local,\n   timestamp_local_no_ms: timestamp_local_no_ms,\n   date_local: date_local, time: time,\n   caudal: caudal_L_s,\n   totalizador: volumen_m3};\nreturn msg;\n*/\n\n// Set custom headers\nmsg.headers = {\n   codigoObra: dga_codigo,\n   timeStampOrigen: timestamp_local_no_ms\n};\n\n// Prepare JSON body\nmsg.payload = {\n   autenticacion: {\n      password: dga_password,\n      rutEmpresa: dga_empresa_rut,\n      rutUsuario: dga_usuario_rut\n   },\n   medicionSuperficialFlujometro: {\n      caudal: caudal_L_s,\n      fechaMedicion: date_local,\n      horaMedicion: time,\n      totalizador: volumen_m3\n   }\n};\n\ndelete msg.pgsql;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2137,7 +2192,8 @@
         "y": 360,
         "wires": [
             [
-                "e24db0a782957a33"
+                "e24db0a782957a33",
+                "e642b7fafc2293e6"
             ]
         ]
     },

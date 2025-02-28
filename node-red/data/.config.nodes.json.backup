@@ -472,7 +472,7 @@
         "name": "node-red-node-email",
         "version": "3.0.2",
         "local": false,
-        "user": false,
+        "user": true,
         "nodes": {
             "email": {
                 "name": "email",
