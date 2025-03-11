@@ -148,11 +148,6 @@
         ]
     },
     {
-        "id": "80b99021.9a4",
-        "type": "node-red-contrib-whatsapp-cmb-account",
-        "name": "PI"
-    },
-    {
         "id": "b23d8359c5c9ebfb",
         "type": "postgreSQLConfig",
         "name": "Timescale",
@@ -178,9 +173,31 @@
         "passwordFieldType": "env"
     },
     {
-        "id": "1cd1c8e9cc8bc8a4",
-        "type": "node-red-contrib-whatsapp-cmb-account",
-        "name": "Julian Meyer"
+        "id": "b2a486f5eb9c244e",
+        "type": "telegram bot",
+        "botname": "SIET Bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
     },
     {
         "id": "2bfa19bdbbcad994",
@@ -1967,8 +1984,7 @@
         "y": 820,
         "wires": [
             [
-                "f190de448e6fa47d",
-                "ed111ca1ee2e5663"
+                "f190de448e6fa47d"
             ]
         ]
     },
@@ -1977,7 +1993,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "function 6",
-        "func": "msg.sensor_id = 1;\nmsg.actuator_id = null;\n\nif(msg.payload > 10 && msg.payload < 80) msg.alert_message = 'Caudal bomba menor a 80L/min';\nelse if (msg.payload > 110) msg.alert_message = 'Caudal bomba ok, mayor a 110L/min';\nreturn msg;",
+        "func": "msg.sensor_id = 1;\nmsg.actuator_id = null;\n\nif(msg.payload > 10 && msg.payload < 100) msg.alert_message = 'Caudal bomba menor a 100L/min';\nelse if (msg.payload > 110) msg.alert_message = 'Caudal bomba ok, mayor a 110L/min';\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2030,7 +2046,7 @@
         "type": "debug",
         "z": "c19fc8a18bff1dd0",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2038,8 +2054,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
-        "y": 60,
+        "x": 690,
+        "y": 40,
         "wires": []
     },
     {
@@ -2064,7 +2080,7 @@
         "payload": "This is a test",
         "payloadType": "str",
         "x": 100,
-        "y": 180,
+        "y": 200,
         "wires": [
             [
                 "ab24375cb61c90bf"
@@ -2085,30 +2101,8 @@
         "name": "philippe.ilharreguy@gmail.com",
         "dname": "PI email",
         "x": 260,
-        "y": 180,
+        "y": 200,
         "wires": []
-    },
-    {
-        "id": "fcb51e4af2e157b9",
-        "type": "node-red-contrib-whatsapp-cmb-send-message",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "credtype": "account",
-        "account": "80b99021.9a4",
-        "text": "alert_message",
-        "phonenumbervalue": "",
-        "apikeyvalue": "",
-        "apikeyinputtypemessage": "msg",
-        "phonenumberinputtypemessage": "msg",
-        "inputtypemessage": "msg",
-        "rejectssl": true,
-        "x": 320,
-        "y": 60,
-        "wires": [
-            [
-                "b234123a.c95f5"
-            ]
-        ]
     },
     {
         "id": "9ce4b6a8c1e9af2c",
@@ -2121,11 +2115,10 @@
             "60858e1e9e71368f"
         ],
         "x": 175,
-        "y": 60,
+        "y": 40,
         "wires": [
             [
-                "fcb51e4af2e157b9",
-                "9b7fdb2b5344b361"
+                "6bec83b7eaf32a11"
             ]
         ]
     },
@@ -2264,45 +2257,6 @@
         ]
     },
     {
-        "id": "643802f6d226e4ea",
-        "type": "debug",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 510,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "9b7fdb2b5344b361",
-        "type": "node-red-contrib-whatsapp-cmb-send-message",
-        "z": "c19fc8a18bff1dd0",
-        "name": "",
-        "credtype": "account",
-        "account": "1cd1c8e9cc8bc8a4",
-        "text": "alert_message",
-        "phonenumbervalue": "",
-        "apikeyvalue": "",
-        "apikeyinputtypemessage": "msg",
-        "phonenumberinputtypemessage": "msg",
-        "inputtypemessage": "msg",
-        "rejectssl": true,
-        "x": 320,
-        "y": 120,
-        "wires": [
-            [
-                "643802f6d226e4ea"
-            ]
-        ]
-    },
-    {
         "id": "700add207deba95f",
         "type": "postgresql",
         "z": "c19fc8a18bff1dd0",
@@ -2357,7 +2311,9 @@
         "x": 250,
         "y": 360,
         "wires": [
-            []
+            [
+                "68772251187a3711"
+            ]
         ]
     },
     {
@@ -2430,5 +2386,41 @@
         "x": 100,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "65f5808701ee9e2f",
+        "type": "telegram sender",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Telegram SIET Bot",
+        "bot": "b2a486f5eb9c244e",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "b234123a.c95f5"
+            ]
+        ]
+    },
+    {
+        "id": "6bec83b7eaf32a11",
+        "type": "function",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Format Telegram Data",
+        "func": "const pi_telegram_chat_id = 6890230823;\n\nmsg.payload = {\n    chatId: pi_telegram_chat_id,\n    type: \"message\",\n    content: msg.alert_message\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 40,
+        "wires": [
+            [
+                "65f5808701ee9e2f"
+            ]
+        ]
     }
 ]
