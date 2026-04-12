@@ -2046,7 +2046,7 @@
         "type": "debug",
         "z": "c19fc8a18bff1dd0",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2054,7 +2054,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 690,
+        "x": 730,
         "y": 40,
         "wires": []
     },
@@ -2080,7 +2080,7 @@
         "payload": "This is a test",
         "payloadType": "str",
         "x": 100,
-        "y": 200,
+        "y": 120,
         "wires": [
             [
                 "ab24375cb61c90bf"
@@ -2101,7 +2101,7 @@
         "name": "philippe.ilharreguy@gmail.com",
         "dname": "PI email",
         "x": 260,
-        "y": 200,
+        "y": 120,
         "wires": []
     },
     {
@@ -2144,7 +2144,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 110,
-        "y": 300,
+        "y": 220,
         "wires": [
             [
                 "923a6d21aa518c7a"
@@ -2162,10 +2162,11 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 330,
-        "y": 300,
+        "y": 220,
         "wires": [
             [
-                "c7ccf197ba79aba1"
+                "c7ccf197ba79aba1",
+                "0167c0a9095560ab"
             ]
         ]
     },
@@ -2182,7 +2183,7 @@
         "finalize": "",
         "libs": [],
         "x": 110,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "e24db0a782957a33",
@@ -2204,7 +2205,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 370,
-        "y": 420,
+        "y": 340,
         "wires": []
     },
     {
@@ -2230,7 +2231,7 @@
         "repair": false,
         "outputs": 2,
         "x": 90,
-        "y": 480,
+        "y": 400,
         "wires": [
             [],
             [
@@ -2249,7 +2250,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 310,
-        "y": 480,
+        "y": 400,
         "wires": [
             [
                 "700add207deba95f"
@@ -2267,7 +2268,7 @@
         "rowsPerMsg": 1,
         "outputs": 1,
         "x": 580,
-        "y": 480,
+        "y": 400,
         "wires": [
             [
                 "8abee50f35a41f33"
@@ -2288,7 +2289,7 @@
         "statusVal": "payload[0]",
         "statusType": "msg",
         "x": 560,
-        "y": 540,
+        "y": 460,
         "wires": []
     },
     {
@@ -2309,7 +2310,7 @@
         "repair": false,
         "outputs": 1,
         "x": 250,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "68772251187a3711"
@@ -2333,7 +2334,7 @@
         "senderr": false,
         "headers": [],
         "x": 390,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "dce6c0439a955937"
@@ -2349,7 +2350,7 @@
         "action": "",
         "pretty": false,
         "x": 530,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "370c6d33df3b5a0b"
@@ -2361,7 +2362,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "ExtractResponse",
-        "func": "let new_payload = msg.payload;\nlet error_counter = context.get('error_counter') || 0;\n\nnew_payload[\"httpStatusCode\"] = msg.statusCode;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\ntry {\n    if (new_payload[\"status\"] == \"00\" || \n    new_payload[\"message\"] == \"Ya existe un registro en esa fecha, hora para la obra\") {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n    }\n    else throw \"Status DGA distinto de 00\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 3) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n    new_payload[\"data\"] = {numeroComprobante: \"0\"};\n    new_payload[\"error\"] = error.toString();\n}\n\ndelete msg.headers;\ndelete msg.statusCode;\ndelete msg.responseUrl;\ndelete msg.redirectList;\ndelete msg.retry;\n\nmsg.payload = new_payload;\nreturn msg;",
+        "func": "let new_payload = msg.payload;\nlet error_counter = context.get('error_counter') || 0;\n\nnew_payload[\"httpStatusCode\"] = msg.statusCode;\n\n// Intenta acceder a informacion. Si no puede, servidor de DGA\n// genero error intentando.\n// Si status es 400, indica que el registro ya existe en la DGA.\ntry {\n    if (new_payload[\"status\"] == \"00\" || new_payload[\"status\"] == \"400\") {\n        new_payload[\"estado_dga\"] = 'Enviado ok';\n        context.set('error_counter', 0);\n\n        // Si ya existe el registra en la DGA, recuperar numero comprobante de mensaje para guardarlo.\n        if (new_payload[\"status\"] == \"400\") {\n            new_payload[\"data\"] = {};\n            new_payload[\"data\"].numeroComprobante = new_payload[\"message\"].split(\": \")[1];\n        }\n    }\n    else throw \"Status DGA distinto de 00\";\n}\ncatch (error) {\n    context.set('error_counter', error_counter + 1);\n\n    // Acumula varios errores antes de definir estado de error.\n    if (error_counter >= 3) {\n        new_payload[\"estado_dga\"] = 'Error en enviado';\n    }\n    new_payload[\"data\"] = {numeroComprobante: \"0\"};\n    new_payload[\"error\"] = error.toString();\n}\n\ndelete msg.headers;\ndelete msg.statusCode;\ndelete msg.responseUrl;\ndelete msg.redirectList;\ndelete msg.retry;\n\nmsg.payload = new_payload;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2369,7 +2370,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "e642b7fafc2293e6",
@@ -2384,7 +2385,7 @@
         "name": "Envio datos DGA",
         "info": "",
         "x": 100,
-        "y": 260,
+        "y": 180,
         "wires": []
     },
     {
@@ -2408,7 +2409,7 @@
         "type": "function",
         "z": "c19fc8a18bff1dd0",
         "name": "Format Telegram Data",
-        "func": "const pi_telegram_chat_id = 6890230823;\n\nmsg.payload = {\n    chatId: pi_telegram_chat_id,\n    type: \"message\",\n    content: msg.alert_message\n};\n\nreturn msg;",
+        "func": "const pi_telegram_chat_id = 6890230823;\nconst julian_telegram_chat_id = 1647978703;\n\nmsg.payload = {\n    chatId: [pi_telegram_chat_id, julian_telegram_chat_id],\n    type: \"message\",\n    content: msg.alert_message\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2422,5 +2423,22 @@
                 "65f5808701ee9e2f"
             ]
         ]
+    },
+    {
+        "id": "0167c0a9095560ab",
+        "type": "debug",
+        "z": "c19fc8a18bff1dd0",
+        "name": "Query",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
     }
 ]
